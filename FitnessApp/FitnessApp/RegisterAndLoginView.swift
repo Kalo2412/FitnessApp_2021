@@ -23,6 +23,7 @@ struct RegisterAndLoginView: View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 8) {
+                    Text("Hello")
                     Text("Fitness App")
                         .bold()
                         .font(.title)
