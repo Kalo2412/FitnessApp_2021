@@ -2,7 +2,7 @@
 //  RegisterAndLoginView.swift
 //  FitnessApp
 //
-//  Created by Sysprobs on 1/18/22.
+//  Created by Stefania Tsvetkova on 1/18/22.
 //
 
 import SwiftUI
@@ -23,7 +23,6 @@ struct RegisterAndLoginView: View {
         NavigationView {
             ScrollView {
                 VStack(spacing: 8) {
-                    Text("Hello")
                     Text("Fitness App")
                         .bold()
                         .font(.title)
@@ -185,11 +184,27 @@ struct RegisterAndLoginView: View {
     }
     
     private func login() {
-        // TODO
+        UserManager.loginUser(email: email, password: password) {
+            isLoggedIn in
+            if !isLoggedIn {
+                loginErrorMessage = "Incorrect email or password"
+            }
+            else {
+                loginErrorMessage = "logged in"
+            }
+        }
     }
     
     private func register() {
-        // TODO
+        UserManager.registerUser(email: email, password: password) {
+            isRegistered, errorMessage in
+            if !isRegistered {
+                registerErrorMessage = errorMessage
+            }
+            else {
+                registerErrorMessage = "registered"
+            }
+        }
     }
     
     private func changeModeToLogin() {

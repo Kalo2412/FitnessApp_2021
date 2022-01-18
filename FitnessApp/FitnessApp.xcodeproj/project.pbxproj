@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,6 +11,10 @@
 		03DFBA5A2796BBBA005C7473 /* RegisterAndLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DFBA592796BBBA005C7473 /* RegisterAndLoginView.swift */; };
 		03DFBA5C2796BBC2005C7473 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03DFBA5B2796BBC2005C7473 /* Assets.xcassets */; };
 		03DFBA5F2796BBC2005C7473 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03DFBA5E2796BBC2005C7473 /* Preview Assets.xcassets */; };
+		03DFBA692796FA15005C7473 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 03DFBA682796FA15005C7473 /* GoogleService-Info.plist */; };
+		03DFBA6D2796FC1C005C7473 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 03DFBA6C2796FC1C005C7473 /* FirebaseAuth */; };
+		03DFBA6F2796FC1C005C7473 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 03DFBA6E2796FC1C005C7473 /* FirebaseStorage */; };
+		03DFBA722796FC70005C7473 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DFBA712796FC70005C7473 /* UserManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +24,8 @@
 		03DFBA5B2796BBC2005C7473 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		03DFBA5E2796BBC2005C7473 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		03DFBA602796BBC2005C7473 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		03DFBA682796FA15005C7473 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		03DFBA712796FC70005C7473 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,6 +33,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03DFBA6D2796FC1C005C7473 /* FirebaseAuth in Frameworks */,
+				03DFBA6F2796FC1C005C7473 /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,7 +64,9 @@
 				03DFBA592796BBBA005C7473 /* RegisterAndLoginView.swift */,
 				03DFBA5B2796BBC2005C7473 /* Assets.xcassets */,
 				03DFBA602796BBC2005C7473 /* Info.plist */,
+				03DFBA682796FA15005C7473 /* GoogleService-Info.plist */,
 				03DFBA5D2796BBC2005C7473 /* Preview Content */,
+				03DFBA712796FC70005C7473 /* UserManager.swift */,
 			);
 			path = FitnessApp;
 			sourceTree = "<group>";
@@ -85,6 +95,10 @@
 			dependencies = (
 			);
 			name = FitnessApp;
+			packageProductDependencies = (
+				03DFBA6C2796FC1C005C7473 /* FirebaseAuth */,
+				03DFBA6E2796FC1C005C7473 /* FirebaseStorage */,
+			);
 			productName = FitnessApp;
 			productReference = 03DFBA542796BBB9005C7473 /* FitnessApp.app */;
 			productType = "com.apple.product-type.application";
@@ -112,6 +126,9 @@
 				Base,
 			);
 			mainGroup = 03DFBA4B2796BBB9005C7473;
+			packageReferences = (
+				03DFBA6B2796FC1C005C7473 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 03DFBA552796BBB9005C7473 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -128,6 +145,7 @@
 			files = (
 				03DFBA5F2796BBC2005C7473 /* Preview Assets.xcassets in Resources */,
 				03DFBA5C2796BBC2005C7473 /* Assets.xcassets in Resources */,
+				03DFBA692796FA15005C7473 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,6 +156,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03DFBA722796FC70005C7473 /* UserManager.swift in Sources */,
 				03DFBA5A2796BBBA005C7473 /* RegisterAndLoginView.swift in Sources */,
 				03DFBA582796BBBA005C7473 /* FitnessAppApp.swift in Sources */,
 			);
@@ -326,6 +345,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		03DFBA6B2796FC1C005C7473 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.10.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		03DFBA6C2796FC1C005C7473 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03DFBA6B2796FC1C005C7473 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		03DFBA6E2796FC1C005C7473 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03DFBA6B2796FC1C005C7473 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 03DFBA4C2796BBB9005C7473 /* Project object */;
 }
