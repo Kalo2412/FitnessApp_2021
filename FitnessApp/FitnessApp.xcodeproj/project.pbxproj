@@ -15,6 +15,7 @@
 		03DFBA6D2796FC1C005C7473 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 03DFBA6C2796FC1C005C7473 /* FirebaseAuth */; };
 		03DFBA6F2796FC1C005C7473 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 03DFBA6E2796FC1C005C7473 /* FirebaseStorage */; };
 		03DFBA722796FC70005C7473 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DFBA712796FC70005C7473 /* UserManager.swift */; };
+		D8418CD327977D2000CFC20B /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8418CD227977D2000CFC20B /* StartView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		03DFBA602796BBC2005C7473 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03DFBA682796FA15005C7473 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		03DFBA712796FC70005C7473 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		D8418CD227977D2000CFC20B /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,11 +64,12 @@
 			children = (
 				03DFBA572796BBBA005C7473 /* FitnessAppApp.swift */,
 				03DFBA592796BBBA005C7473 /* RegisterAndLoginView.swift */,
+				D8418CD227977D2000CFC20B /* StartView.swift */,
+				03DFBA712796FC70005C7473 /* UserManager.swift */,
 				03DFBA5B2796BBC2005C7473 /* Assets.xcassets */,
 				03DFBA602796BBC2005C7473 /* Info.plist */,
 				03DFBA682796FA15005C7473 /* GoogleService-Info.plist */,
 				03DFBA5D2796BBC2005C7473 /* Preview Content */,
-				03DFBA712796FC70005C7473 /* UserManager.swift */,
 			);
 			path = FitnessApp;
 			sourceTree = "<group>";
@@ -159,6 +162,7 @@
 				03DFBA722796FC70005C7473 /* UserManager.swift in Sources */,
 				03DFBA5A2796BBBA005C7473 /* RegisterAndLoginView.swift in Sources */,
 				03DFBA582796BBBA005C7473 /* FitnessAppApp.swift in Sources */,
+				D8418CD327977D2000CFC20B /* StartView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
