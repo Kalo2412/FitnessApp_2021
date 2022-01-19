@@ -21,8 +21,7 @@ class UserManager: NSObject {
     }
     
     public static func registerUser(email: String, password: String, completionHandler: @escaping (_ isRegistered: Bool, _ errorMessage: String) -> Void) {
-        instance.auth.createUser(withEmail: email, password: password) {
-            result, error in
+        instance.auth.createUser(withEmail: email, password: password) { result, error in
             if let error = error {
                 completionHandler(false, error.localizedDescription.description)
             }
@@ -33,9 +32,7 @@ class UserManager: NSObject {
     }
     
     public static func loginUser(email: String, password: String, completionHandler: @escaping (_ isLoggedIn: Bool) -> Void) {
-        instance.auth.signIn(withEmail: email, password: password) {
-            result, error in
-            
+        instance.auth.signIn(withEmail: email, password: password) { result, error in
             if let error = error {
                 completionHandler(false)
             }
