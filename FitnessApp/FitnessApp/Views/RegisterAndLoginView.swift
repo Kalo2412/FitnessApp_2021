@@ -15,6 +15,8 @@ struct RegisterAndLoginView: View {
     
     @State var loginErrorMessage = ""
     @State var registerErrorMessage = ""
+    
+    @State var isActiveForLogin = false
 
     var body: some View {
         NavigationView {
@@ -57,19 +59,22 @@ struct RegisterAndLoginView: View {
                         
                         Spacer()
                         
-                        Button
-                        {
-                            login()
-                        } label: {
-                            HStack {
-                                Spacer()
-                                Text("Log in")
-                                    .foregroundColor(Color.white)
-                                    .padding(.horizontal, 20)
-                                    .padding(.vertical, 10)
-                                    .background(Color(red: 42 / 255, green: 104 / 255, blue: 115 / 255))
-                                    .cornerRadius(14)
-                                Spacer()
+                        NavigationLink(destination: HomePageView(), isActive: $isActiveForLogin) {
+                            Button (action: {
+                                login() { isLoggedIn in
+                                    self.isActiveForLogin = isLoggedIn
+                                }
+                            }) {
+                                HStack {
+                                    Spacer()
+                                    Text("Log in")
+                                        .foregroundColor(Color.white)
+                                        .padding(.horizontal, 20)
+                                        .padding(.vertical, 10)
+                                        .background(Color(red: 42 / 255, green: 104 / 255, blue: 115 / 255))
+                                        .cornerRadius(14)
+                                    Spacer()
+                                }
                             }
                         }
                         
@@ -183,14 +188,15 @@ struct RegisterAndLoginView: View {
         }
     }
     
-    private func login() {
+    private func login(response: @escaping (_ isLoggedIn: Bool) -> Void) {
         UserManager.loginUser(email: loginModel.email, password: loginModel.password) {
             isLoggedIn in
             if !isLoggedIn {
                 loginErrorMessage = "Incorrect email or password"
+                response(false)
             }
             else {
-                loginErrorMessage = "logged in"
+                response(true)
             }
         }
     }
