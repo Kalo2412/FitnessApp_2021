@@ -50,7 +50,7 @@ struct RegisterAndLoginView: View {
                                     .modifier(PlaceholderStyle(showPlaceHolder: loginModel.email.isEmpty, placeholder: "Email"))
                                 
                                 SecureField("", text: $loginModel.password)
-                                    .modifier(PlaceholderStyle(showPlaceHolder: loginModel.email.isEmpty, placeholder: "Password"))
+                                    .modifier(PlaceholderStyle(showPlaceHolder: loginModel.password.isEmpty, placeholder: "Password"))
                             }
                             .frame(width: 250)
                             .padding(.horizontal, 10)
