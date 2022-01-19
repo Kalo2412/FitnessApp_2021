@@ -17,6 +17,7 @@ struct RegisterAndLoginView: View {
     @State var registerErrorMessage = ""
     
     @State var isActiveForLogin = false
+    @State var isActiveForRegister = false
 
     var body: some View {
         NavigationView {
@@ -145,19 +146,22 @@ struct RegisterAndLoginView: View {
                         
                         Spacer()
                         
-                        Button
-                        {
-                            register()
-                        } label: {
-                            HStack {
-                                Spacer()
-                                Text("Register")
-                                    .foregroundColor(Color.white)
-                                    .padding(.horizontal, 20)
-                                    .padding(.vertical, 10)
-                                    .background(Color(red: 42 / 255, green: 104 / 255, blue: 115 / 255))
-                                    .cornerRadius(14)
-                                Spacer()
+                        NavigationLink(destination: HomePageView(), isActive: $isActiveForRegister) {
+                            Button (action: {
+                                register() { isRegistered in
+                                    self.isActiveForRegister = isRegistered
+                                }
+                            }) {
+                                HStack {
+                                    Spacer()
+                                    Text("Register")
+                                        .foregroundColor(Color.white)
+                                        .padding(.horizontal, 20)
+                                        .padding(.vertical, 10)
+                                        .background(Color(red: 42 / 255, green: 104 / 255, blue: 115 / 255))
+                                        .cornerRadius(14)
+                                    Spacer()
+                                }
                             }
                         }
                         
@@ -201,14 +205,15 @@ struct RegisterAndLoginView: View {
         }
     }
     
-    private func register() {
+    private func register(response: @escaping (_ isRegistered: Bool) -> Void){
         UserManager.registerUser(email: registerModel.email, password: registerModel.password) {
             isRegistered, errorMessage in
             if !isRegistered {
                 registerErrorMessage = errorMessage
+                response(false)
             }
             else {
-                registerErrorMessage = "registered"
+                response(true)
             }
         }
     }
