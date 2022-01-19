@@ -10,11 +10,8 @@ import SwiftUI
 struct RegisterAndLoginView: View {
     @State var isLoginMode = true
     
-    @State var email = ""
-    @State var password = ""
-    @State var name = ""
-    @State var age = ""
-    @State var profession = ""
+    @State var registerModel = RegisterViewModel()
+    @State var loginModel = LoginViewModel()
     
     @State var loginErrorMessage = ""
     @State var registerErrorMessage = ""
@@ -38,7 +35,7 @@ struct RegisterAndLoginView: View {
                     
                     if isLoginMode {
                         Group {
-                            TextField("Email", text: $email)
+                            TextField("Email", text: $loginModel.email)
                                 .keyboardType(.emailAddress)
                                 .autocapitalization(.none)
                                 .padding(.horizontal, 10)
@@ -48,7 +45,7 @@ struct RegisterAndLoginView: View {
                                     .stroke(Color(red: 42 / 255, green: 104 / 255, blue: 115 / 255), lineWidth: 2)
                                 )
                                 
-                            SecureField("Password", text: $password)
+                            SecureField("Password", text: $loginModel.password)
                                 .padding(.horizontal, 10)
                                 .padding(.vertical, 10)
                                 .overlay(
@@ -95,7 +92,7 @@ struct RegisterAndLoginView: View {
                     else
                     {
                         Group {
-                            TextField("Email", text: $email)
+                            TextField("Email", text: $registerModel.email)
                                 .keyboardType(.emailAddress)
                                 .autocapitalization(.none)
                                 .padding(.horizontal, 10)
@@ -105,7 +102,7 @@ struct RegisterAndLoginView: View {
                                     .stroke(Color(red: 42 / 255, green: 104 / 255, blue: 115 / 255), lineWidth: 2)
                                 )
                             
-                            SecureField("Password", text: $password)
+                            SecureField("Password", text: $registerModel.password)
                                 .padding(.horizontal, 10)
                                 .padding(.vertical, 10)
                                 .overlay(
@@ -113,7 +110,7 @@ struct RegisterAndLoginView: View {
                                     .stroke(Color(red: 42 / 255, green: 104 / 255, blue: 115 / 255), lineWidth: 2)
                                 )
                             
-                            TextField("Name", text: $name)
+                            TextField("Name", text: $registerModel.name)
                                 .padding(.horizontal, 10)
                                 .padding(.vertical, 10)
                                 .overlay(
@@ -121,7 +118,7 @@ struct RegisterAndLoginView: View {
                                     .stroke(Color(red: 42 / 255, green: 104 / 255, blue: 115 / 255), lineWidth: 2)
                                 )
                             
-                            TextField("Age", text: $age)
+                            TextField("Age", text: $registerModel.age)
                                 .keyboardType(.numberPad)
                                 .padding(.horizontal, 10)
                                 .padding(.vertical, 10)
@@ -130,7 +127,7 @@ struct RegisterAndLoginView: View {
                                     .stroke(Color(red: 42 / 255, green: 104 / 255, blue: 115 / 255), lineWidth: 2)
                                 )
                             
-                            TextField("Proffecion", text: $profession)
+                            TextField("Proffecion", text: $registerModel.profession)
                                 .padding(.horizontal, 10)
                                 .padding(.vertical, 10)
                                 .overlay(
@@ -184,7 +181,7 @@ struct RegisterAndLoginView: View {
     }
     
     private func login() {
-        UserManager.loginUser(email: email, password: password) {
+        UserManager.loginUser(email: loginModel.email, password: loginModel.password) {
             isLoggedIn in
             if !isLoggedIn {
                 loginErrorMessage = "Incorrect email or password"
@@ -196,7 +193,7 @@ struct RegisterAndLoginView: View {
     }
     
     private func register() {
-        UserManager.registerUser(email: email, password: password) {
+        UserManager.registerUser(email: registerModel.email, password: registerModel.password) {
             isRegistered, errorMessage in
             if !isRegistered {
                 registerErrorMessage = errorMessage
