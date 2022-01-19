@@ -21,172 +21,177 @@ struct RegisterAndLoginView: View {
 
     var body: some View {
         NavigationView {
-            ScrollView {
-                VStack(spacing: 10) {
-                    Text("Fitness App")
-                        .bold()
-                        .font(.title)
-                        .foregroundColor(Color(red: 42 / 255, green: 104 / 255, blue: 115 / 255))
-                    
-                    Image("app-icon")
-                        .renderingMode(.original)
+            ZStack {
+                Image("startImage")
                         .resizable()
-                        .scaledToFit()
-                        .frame(width: 80, height: 80, alignment: .center)
+                        .aspectRatio(contentMode: .fill)
+                        .edgesIgnoringSafeArea(.all)
+                        .blur(radius: 5)
+                
+                ScrollView {
+                    VStack(spacing: 15) {
+                        Text("Fitness App")
+                            .font(.system(size: 40, weight: .bold, design: .monospaced))
+                            .foregroundColor(Color.white)
                         
-                    Spacer()
-                    
-                    if isLoginMode {
-                        Group {
-                            TextField("Email", text: $loginModel.email)
-                                .keyboardType(.emailAddress)
-                                .autocapitalization(.none)
-                                .padding(.horizontal, 10)
-                                .padding(.vertical, 10)
-                                .overlay(
-                                RoundedRectangle(cornerRadius: 14)
-                                    .stroke(Color(red: 42 / 255, green: 104 / 255, blue: 115 / 255), lineWidth: 2)
-                                )
-                                
-                            SecureField("Password", text: $loginModel.password)
-                                .padding(.horizontal, 10)
-                                .padding(.vertical, 10)
-                                .overlay(
-                                RoundedRectangle(cornerRadius: 14)
-                                    .stroke(Color(red: 42 / 255, green: 104 / 255, blue: 115 / 255), lineWidth: 2)
-                                )
-                        }
-                        .background(RoundedRectangle(cornerRadius: 14).fill(Color.white))
-                        
+                        Image("app-icon-white")
+                            .renderingMode(.original)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 80, height: 80, alignment: .center)
+                            
                         Spacer()
                         
-                        NavigationLink(destination: HomePageView(), isActive: $isActiveForLogin) {
-                            Button (action: {
-                                login() { isLoggedIn in
-                                    self.isActiveForLogin = isLoggedIn
+                        if isLoginMode {
+                            Group {
+                                TextField("", text: $loginModel.email)
+                                    .keyboardType(.emailAddress)
+                                    .autocapitalization(.none)
+                                    .modifier(PlaceholderStyle(showPlaceHolder: loginModel.email.isEmpty, placeholder: "Email"))
+                                
+                                SecureField("", text: $loginModel.password)
+                                    .modifier(PlaceholderStyle(showPlaceHolder: loginModel.email.isEmpty, placeholder: "Password"))
+                            }
+                            .frame(width: 250)
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 10)
+                            .overlay(
+                            RoundedRectangle(cornerRadius: 14)
+                                .stroke(Color.white, lineWidth: 2)
+                            )
+                            
+                            Spacer()
+                            
+                            NavigationLink(destination: HomePageView(), isActive: $isActiveForLogin) {
+                                Button (action: {
+                                    login() { isLoggedIn in
+                                        self.isActiveForLogin = isLoggedIn
+                                    }
+                                }) {
+                                    HStack {
+                                        Spacer()
+                                        Text("Log in")
+                                            .foregroundColor(Color.black)
+                                            .bold()
+                                            .padding(.horizontal, 20)
+                                            .padding(.vertical, 10)
+                                            .background(Color.white)
+                                            .cornerRadius(14)
+                                        Spacer()
+                                    }
                                 }
-                            }) {
-                                HStack {
-                                    Spacer()
-                                    Text("Log in")
+                            }
+                            
+                            Button {
+                                changeModeToRegister()
+                            } label: {
+                                VStack {
+                                    Text("Don't have an account?")
                                         .foregroundColor(Color.white)
-                                        .padding(.horizontal, 20)
-                                        .padding(.vertical, 10)
-                                        .background(Color(red: 42 / 255, green: 104 / 255, blue: 115 / 255))
-                                        .cornerRadius(14)
-                                    Spacer()
-                                }
-                            }
-                        }
-                        
-                        Button {
-                            changeModeToRegister()
-                        } label: {
-                            VStack {
-                                Text("Don't have an account?")
-                                    .foregroundColor(Color.black)
-                                
-                                Text("Register")
-                                    .foregroundColor(Color(red: 42 / 255, green: 104 / 255, blue: 115 / 255))
-                            }
-                        }
-                        
-                        Text(loginErrorMessage)
-                            .foregroundColor(Color.red)
-                            .multilineTextAlignment(.center)
-                    }
-                    else
-                    {
-                        Group {
-                            TextField("Email", text: $registerModel.email)
-                                .keyboardType(.emailAddress)
-                                .autocapitalization(.none)
-                                .padding(.horizontal, 10)
-                                .padding(.vertical, 10)
-                                .overlay(
-                                RoundedRectangle(cornerRadius: 14)
-                                    .stroke(Color(red: 42 / 255, green: 104 / 255, blue: 115 / 255), lineWidth: 2)
-                                )
-                            
-                            SecureField("Password", text: $registerModel.password)
-                                .padding(.horizontal, 10)
-                                .padding(.vertical, 10)
-                                .overlay(
-                                RoundedRectangle(cornerRadius: 14)
-                                    .stroke(Color(red: 42 / 255, green: 104 / 255, blue: 115 / 255), lineWidth: 2)
-                                )
-                            
-                            TextField("Name", text: $registerModel.name)
-                                .padding(.horizontal, 10)
-                                .padding(.vertical, 10)
-                                .overlay(
-                                RoundedRectangle(cornerRadius: 14)
-                                    .stroke(Color(red: 42 / 255, green: 104 / 255, blue: 115 / 255), lineWidth: 2)
-                                )
-                            
-                            TextField("Age", text: $registerModel.age)
-                                .keyboardType(.numberPad)
-                                .padding(.horizontal, 10)
-                                .padding(.vertical, 10)
-                                .overlay(
-                                RoundedRectangle(cornerRadius: 14)
-                                    .stroke(Color(red: 42 / 255, green: 104 / 255, blue: 115 / 255), lineWidth: 2)
-                                )
-                            
-                            TextField("Proffecion", text: $registerModel.profession)
-                                .padding(.horizontal, 10)
-                                .padding(.vertical, 10)
-                                .overlay(
-                                RoundedRectangle(cornerRadius: 14)
-                                    .stroke(Color(red: 42 / 255, green: 104 / 255, blue: 115 / 255), lineWidth: 2)
-                                )
-                            
-                        }
-                        .background(RoundedRectangle(cornerRadius: 14).fill(Color.white))
-                        
-                        Spacer()
-                        
-                        NavigationLink(destination: HomePageView(), isActive: $isActiveForRegister) {
-                            Button (action: {
-                                register() { isRegistered in
-                                    self.isActiveForRegister = isRegistered
-                                }
-                            }) {
-                                HStack {
-                                    Spacer()
+                                    
                                     Text("Register")
                                         .foregroundColor(Color.white)
-                                        .padding(.horizontal, 20)
-                                        .padding(.vertical, 10)
-                                        .background(Color(red: 42 / 255, green: 104 / 255, blue: 115 / 255))
-                                        .cornerRadius(14)
-                                    Spacer()
+                                        .bold()
                                 }
                             }
+                            
+                            Text(loginErrorMessage)
+                                .foregroundColor(Color.red)
+                                .multilineTextAlignment(.center)
                         }
-                        
-                        Button {
-                            changeModeToLogin()
-                        } label: {
-                            VStack {
-                                Text("Already have an account?")
-                                    .foregroundColor(Color.black)
+                        else
+                        {
+                            Group {
+                                TextField("Email", text: $registerModel.email)
+                                    .keyboardType(.emailAddress)
+                                    .autocapitalization(.none)
+                                    .padding(.horizontal, 10)
+                                    .padding(.vertical, 10)
+                                    .overlay(
+                                    RoundedRectangle(cornerRadius: 14)
+                                        .stroke(Color(red: 42 / 255, green: 104 / 255, blue: 115 / 255), lineWidth: 2)
+                                    )
                                 
-                                Text("Log in")
-                                    .foregroundColor(Color(red: 42 / 255, green: 104 / 255, blue: 115 / 255))
+                                SecureField("Password", text: $registerModel.password)
+                                    .padding(.horizontal, 10)
+                                    .padding(.vertical, 10)
+                                    .overlay(
+                                    RoundedRectangle(cornerRadius: 14)
+                                        .stroke(Color(red: 42 / 255, green: 104 / 255, blue: 115 / 255), lineWidth: 2)
+                                    )
+                                
+                                TextField("Name", text: $registerModel.name)
+                                    .padding(.horizontal, 10)
+                                    .padding(.vertical, 10)
+                                    .overlay(
+                                    RoundedRectangle(cornerRadius: 14)
+                                        .stroke(Color(red: 42 / 255, green: 104 / 255, blue: 115 / 255), lineWidth: 2)
+                                    )
+                                
+                                TextField("Age", text: $registerModel.age)
+                                    .keyboardType(.numberPad)
+                                    .padding(.horizontal, 10)
+                                    .padding(.vertical, 10)
+                                    .overlay(
+                                    RoundedRectangle(cornerRadius: 14)
+                                        .stroke(Color(red: 42 / 255, green: 104 / 255, blue: 115 / 255), lineWidth: 2)
+                                    )
+                                
+                                TextField("Proffecion", text: $registerModel.profession)
+                                    .padding(.horizontal, 10)
+                                    .padding(.vertical, 10)
+                                    .overlay(
+                                    RoundedRectangle(cornerRadius: 14)
+                                        .stroke(Color(red: 42 / 255, green: 104 / 255, blue: 115 / 255), lineWidth: 2)
+                                    )
+                                
                             }
+                            .background(RoundedRectangle(cornerRadius: 14).fill(Color.white))
+                            
+                            Spacer()
+                            
+                            NavigationLink(destination: HomePageView(), isActive: $isActiveForRegister) {
+                                Button (action: {
+                                    register() { isRegistered in
+                                        self.isActiveForRegister = isRegistered
+                                    }
+                                }) {
+                                    HStack {
+                                        Spacer()
+                                        Text("Register")
+                                            .foregroundColor(Color.white)
+                                            .padding(.horizontal, 20)
+                                            .padding(.vertical, 10)
+                                            .background(Color(red: 42 / 255, green: 104 / 255, blue: 115 / 255))
+                                            .cornerRadius(14)
+                                        Spacer()
+                                    }
+                                }
+                            }
+                            
+                            Button {
+                                changeModeToLogin()
+                            } label: {
+                                VStack {
+                                    Text("Already have an account?")
+                                        .foregroundColor(Color.black)
+                                    
+                                    Text("Log in")
+                                        .foregroundColor(Color(red: 42 / 255, green: 104 / 255, blue: 115 / 255))
+                                }
+                            }
+                            
+                            Text(registerErrorMessage)
+                                .foregroundColor(Color.red)
+                                .multilineTextAlignment(.center)
                         }
-                        
-                        Text(registerErrorMessage)
-                            .foregroundColor(Color.red)
-                            .multilineTextAlignment(.center)
                     }
+                    .padding()
+                    .navigationBarHidden(true)
+                    .navigationBarTitle("")
                 }
-                .padding()
-                .navigationBarHidden(true)
-                .navigationBarTitle("")
             }
-            .background(Color(red: 207 / 255, green: 222 / 255, blue: 203 / 255)
+            .background(Color("lightGreen")
                             .ignoresSafeArea())
             //.navigationBarBackButtonHidden(true)
         }
@@ -230,5 +235,21 @@ struct RegisterAndLoginView: View {
 struct RegisterAndLoginView_Previews: PreviewProvider {
     static var previews: some View {
         RegisterAndLoginView()
+    }
+}
+
+public struct PlaceholderStyle: ViewModifier {
+    var showPlaceHolder: Bool
+    var placeholder: String
+
+    public func body(content: Content) -> some View {
+        ZStack(alignment: .leading) {
+            if showPlaceHolder {
+                Text(placeholder)
+                    .foregroundColor(Color.white)
+            }
+            content
+                .foregroundColor(Color.white)
+        }
     }
 }
