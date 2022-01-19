@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct RegisterAndLoginView: View {
-    @State var isLoginMode = true
+    @State private var isLoginMode = true
     
-    @State var registerModel = RegisterViewModel()
-    @State var loginModel = LoginViewModel()
+    @State private var registerModel = RegisterViewModel()
+    @State private var loginModel = LoginViewModel()
     
-    @State var loginErrorMessage = ""
-    @State var registerErrorMessage = ""
+    @State private var loginErrorMessage = ""
+    @State private var registerErrorMessage = ""
     
-    @State var isActiveForLogin = false
-    @State var isActiveForRegister = false
+    @State private var isActiveForLogin = false
+    @State private var isActiveForRegister = false
 
     var body: some View {
         NavigationView {
