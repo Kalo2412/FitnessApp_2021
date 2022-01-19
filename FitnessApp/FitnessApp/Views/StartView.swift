@@ -17,12 +17,12 @@ struct StartView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .edgesIgnoringSafeArea(.all)
-                VStack {
+                VStack(spacing: 15) {
                     Text("Welcome")
                         .font(.system(size: 60, weight: .bold, design: .monospaced))
                         .foregroundColor(.white)
                     Spacer()
-                    NavigationLink(destination: RegisterAndLoginView()) {
+                    NavigationLink(destination: RegisterAndLoginView().navigationBarBackButtonHidden(true)) {
                         HStack {
                             Image(systemName: "person")
                                 .font(.title)
@@ -33,11 +33,11 @@ struct StartView: View {
                         .frame(minWidth: 0, maxWidth: .infinity)
                         .padding()
                         .foregroundColor(.white)
-                        .background(LinearGradient(gradient: Gradient(colors: [Color.red,Color("grassyGreen")]), startPoint: .leading, endPoint: .trailing))
+                        .background(LinearGradient(gradient: Gradient(colors: [Color("darkGreen"),Color.green]), startPoint: .leading, endPoint: .trailing))
                         .cornerRadius(40)
                         .shadow(radius: 5.0)
                     }
-                    NavigationLink(destination: RegisterAndLoginView()) {
+                    NavigationLink(destination: RegisterAndLoginView().navigationBarBackButtonHidden(true)) {
                         HStack {
                             Image(systemName: "rectangle.and.pencil.and.ellipsis")
                                 .font(.title)

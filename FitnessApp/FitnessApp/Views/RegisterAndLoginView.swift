@@ -19,7 +19,7 @@ struct RegisterAndLoginView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-                VStack(spacing: 8) {
+                VStack(spacing: 10) {
                     Text("Fitness App")
                         .bold()
                         .font(.title)
@@ -174,9 +174,12 @@ struct RegisterAndLoginView: View {
                     }
                 }
                 .padding()
+                .navigationBarHidden(true)
+                .navigationBarTitle("")
             }
             .background(Color(red: 207 / 255, green: 222 / 255, blue: 203 / 255)
                             .ignoresSafeArea())
+            //.navigationBarBackButtonHidden(true)
         }
     }
     

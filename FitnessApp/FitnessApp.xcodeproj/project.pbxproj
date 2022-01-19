@@ -68,10 +68,10 @@
 		03DFBA562796BBB9005C7473 /* FitnessApp */ = {
 			isa = PBXGroup;
 			children = (
+				03DFBA572796BBBA005C7473 /* FitnessAppApp.swift */,
 				03DFBA7D27971596005C7473 /* Controllers */,
 				03DFBA7C27971577005C7473 /* Views */,
 				03DFBA7B2797156B005C7473 /* ViewModels */,
-				03DFBA572796BBBA005C7473 /* FitnessAppApp.swift */,
 				03DFBA5B2796BBC2005C7473 /* Assets.xcassets */,
 				03DFBA602796BBC2005C7473 /* Info.plist */,
 				03FDBE192798546F002B8742 /* GoogleService-Info.plist */,
