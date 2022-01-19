@@ -102,51 +102,32 @@ struct RegisterAndLoginView: View {
                         else
                         {
                             Group {
-                                TextField("Email", text: $registerModel.email)
+                                TextField("", text: $registerModel.email)
                                     .keyboardType(.emailAddress)
                                     .autocapitalization(.none)
-                                    .padding(.horizontal, 10)
-                                    .padding(.vertical, 10)
-                                    .overlay(
-                                    RoundedRectangle(cornerRadius: 14)
-                                        .stroke(Color(red: 42 / 255, green: 104 / 255, blue: 115 / 255), lineWidth: 2)
-                                    )
+                                    .modifier(PlaceholderStyle(showPlaceHolder: registerModel.email.isEmpty, placeholder: "Email"))
                                 
-                                SecureField("Password", text: $registerModel.password)
-                                    .padding(.horizontal, 10)
-                                    .padding(.vertical, 10)
-                                    .overlay(
-                                    RoundedRectangle(cornerRadius: 14)
-                                        .stroke(Color(red: 42 / 255, green: 104 / 255, blue: 115 / 255), lineWidth: 2)
-                                    )
+                                SecureField("", text: $registerModel.password)
+                                    .modifier(PlaceholderStyle(showPlaceHolder: registerModel.password.isEmpty, placeholder: "Password"))
                                 
-                                TextField("Name", text: $registerModel.name)
-                                    .padding(.horizontal, 10)
-                                    .padding(.vertical, 10)
-                                    .overlay(
-                                    RoundedRectangle(cornerRadius: 14)
-                                        .stroke(Color(red: 42 / 255, green: 104 / 255, blue: 115 / 255), lineWidth: 2)
-                                    )
+                                TextField("", text: $registerModel.name)
+                                    .modifier(PlaceholderStyle(showPlaceHolder: registerModel.name.isEmpty, placeholder: "Name"))
                                 
-                                TextField("Age", text: $registerModel.age)
+                                TextField("", text: $registerModel.age)
                                     .keyboardType(.numberPad)
-                                    .padding(.horizontal, 10)
-                                    .padding(.vertical, 10)
-                                    .overlay(
-                                    RoundedRectangle(cornerRadius: 14)
-                                        .stroke(Color(red: 42 / 255, green: 104 / 255, blue: 115 / 255), lineWidth: 2)
-                                    )
+                                    .modifier(PlaceholderStyle(showPlaceHolder: registerModel.age.isEmpty, placeholder: "Age"))
                                 
-                                TextField("Proffecion", text: $registerModel.profession)
-                                    .padding(.horizontal, 10)
-                                    .padding(.vertical, 10)
-                                    .overlay(
-                                    RoundedRectangle(cornerRadius: 14)
-                                        .stroke(Color(red: 42 / 255, green: 104 / 255, blue: 115 / 255), lineWidth: 2)
-                                    )
+                                TextField("", text: $registerModel.profession)
+                                    .modifier(PlaceholderStyle(showPlaceHolder: registerModel.profession.isEmpty, placeholder: "Proffecion"))
                                 
                             }
-                            .background(RoundedRectangle(cornerRadius: 14).fill(Color.white))
+                            .frame(width: 250)
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 10)
+                            .overlay(
+                            RoundedRectangle(cornerRadius: 14)
+                                .stroke(Color.white, lineWidth: 2)
+                            )
                             
                             Spacer()
                             
@@ -159,10 +140,11 @@ struct RegisterAndLoginView: View {
                                     HStack {
                                         Spacer()
                                         Text("Register")
-                                            .foregroundColor(Color.white)
+                                            .foregroundColor(Color.black)
+                                            .bold()
                                             .padding(.horizontal, 20)
                                             .padding(.vertical, 10)
-                                            .background(Color(red: 42 / 255, green: 104 / 255, blue: 115 / 255))
+                                            .background(Color.white)
                                             .cornerRadius(14)
                                         Spacer()
                                     }
@@ -174,10 +156,11 @@ struct RegisterAndLoginView: View {
                             } label: {
                                 VStack {
                                     Text("Already have an account?")
-                                        .foregroundColor(Color.black)
+                                        .foregroundColor(Color.white)
                                     
                                     Text("Log in")
-                                        .foregroundColor(Color(red: 42 / 255, green: 104 / 255, blue: 115 / 255))
+                                        .foregroundColor(Color.white)
+                                        .bold()
                                 }
                             }
                             
