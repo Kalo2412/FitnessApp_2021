@@ -20,11 +20,10 @@ struct MainView: View {
                     Label("Trainings", systemImage: "list.bullet")
                 }
             
-            ProfileView()
+            ProfileView(userUid: FirebaseManager.instance.auth.currentUser?.uid as? String ?? "")
                 .tabItem {
                     Label("Profile", systemImage: "person.fill")
                 }
-            
         }
         .navigationBarBackButtonHidden(true)
         .accentColor(Color("darkGreen"))

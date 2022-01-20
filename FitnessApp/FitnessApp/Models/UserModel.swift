@@ -6,13 +6,14 @@
 //
 
 class UserModel {
-    var uid: String = ""
+    var uid: String = FirebaseManager.instance.auth.currentUser?.uid ?? ""
     var email: String = ""
     var name: String = ""
     var age: String = ""
     var profession: String = ""
     
     init(uid: String) {
+        
         if uid != "" {
             FirebaseManager.instance.firestore.collection("users").document(uid).getDocument { document, error in
                 guard error == nil else {
@@ -24,7 +25,7 @@ class UserModel {
                     self.uid = uid
                     self.email = data["email"] as? String ?? ""
                     self.name = data["name"] as? String ?? ""
-                    self.age = data["age"] as? String ?? ""
+                    self.age = String(data["age"] as? Int ?? 0)
                     self.profession = data["profession"] as? String ?? ""
                 }
             }
