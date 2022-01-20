@@ -235,7 +235,8 @@ struct RegisterAndLoginView: View {
             }
             
             FirebaseManager.instance.firestore.collection("users").document(userUid)
-                .setData(["name": registerModel.name,
+                .setData(["email": registerModel.email,
+                          "name": registerModel.name,
                           "age": ageAsInt,
                           "proffession": registerModel.profession])
             { error in
