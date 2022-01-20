@@ -234,10 +234,10 @@ struct RegisterAndLoginView: View {
                 return
             }
             
-            FirebaseManager.instance.firestore.collection("users").addDocument(data: ["uid": userUid,
-                                                                                      "name": registerModel.name,
-                                                                                      "age": ageAsInt,
-                                                                                      "proffession": registerModel.profession])
+            FirebaseManager.instance.firestore.collection("users").document(userUid)
+                .setData(["name": registerModel.name,
+                          "age": ageAsInt,
+                          "proffession": registerModel.profession])
             { error in
                 if error != nil {
                     FirebaseManager.instance.auth.currentUser?.delete()
