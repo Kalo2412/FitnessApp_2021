@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		03635F982798352400FD4F61 /* HomePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03635F972798352400FD4F61 /* HomePageView.swift */; };
+		03C2511F2799FE8300C0897F /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C2511E2799FE8300C0897F /* UserModel.swift */; };
 		03CA0F05279979EE00EF5EF7 /* PopUpWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CA0F04279979EE00EF5EF7 /* PopUpWindow.swift */; };
 		03CA0F092799940300EF5EF7 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 03CA0F082799940300EF5EF7 /* FirebaseAuth */; };
 		03CA0F0B2799940300EF5EF7 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 03CA0F0A2799940300EF5EF7 /* FirebaseFirestore */; };
@@ -28,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		03635F972798352400FD4F61 /* HomePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageView.swift; sourceTree = "<group>"; };
+		03C2511E2799FE8300C0897F /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		03CA0F04279979EE00EF5EF7 /* PopUpWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpWindow.swift; sourceTree = "<group>"; };
 		03CA0F0F2799AD0200EF5EF7 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		03CA0F122799AF3000EF5EF7 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 			children = (
 				03DFBA7527970BF9005C7473 /* RegisterModel.swift */,
 				03DFBA7827970C79005C7473 /* LoginModel.swift */,
+				03C2511E2799FE8300C0897F /* UserModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 				03DFBA5A2796BBBA005C7473 /* RegisterAndLoginView.swift in Sources */,
 				03DFBA582796BBBA005C7473 /* FitnessAppApp.swift in Sources */,
 				03635F982798352400FD4F61 /* HomePageView.swift in Sources */,
+				03C2511F2799FE8300C0897F /* UserModel.swift in Sources */,
 				D8418CD327977D2000CFC20B /* StartView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
