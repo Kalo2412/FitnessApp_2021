@@ -86,16 +86,16 @@ struct RegisterAndLoginView: View {
                                 }
                             }
                             
-                            Button {
-                                changeModeToRegister()
-                            } label: {
-                                VStack {
-                                    Text("Don't have an account?")
-                                        .foregroundColor(Color.white)
-                                    
-                                    Text("Register")
-                                        .foregroundColor(Color.white)
-                                        .bold()
+                            VStack {
+                                Text("Don't have an account?")
+                                    .foregroundColor(Color.white)
+                                
+                                Button {
+                                    changeModeToRegister()
+                                } label: {
+                                        Text("Register")
+                                            .foregroundColor(Color.white)
+                                            .bold()
                                 }
                             }
                             
@@ -155,16 +155,16 @@ struct RegisterAndLoginView: View {
                                 }
                             }
                             
-                            Button {
-                                changeModeToLogin()
-                            } label: {
-                                VStack {
-                                    Text("Already have an account?")
-                                        .foregroundColor(Color.white)
-                                    
-                                    Text("Log in")
-                                        .foregroundColor(Color.white)
-                                        .bold()
+                            VStack {
+                                Text("Already have an account?")
+                                    .foregroundColor(Color.white)
+                                
+                                Button {
+                                    changeModeToLogin()
+                                } label: {
+                                        Text("Log in")
+                                            .foregroundColor(Color.white)
+                                            .bold()
                                 }
                             }
                             
