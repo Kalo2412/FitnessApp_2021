@@ -198,15 +198,57 @@ struct RegisterAndLoginView: View {
     }
     
     private func register(response: @escaping (_ isRegistered: Bool) -> Void){
+        if registerModel.name == "" {
+            showPopUpWindow = true
+            errorMessage = "Invalid name"
+            response(false)
+            return
+        }
+        
+        let ageAsInt = Int(registerModel.age) ?? 0
+        if ageAsInt <= 0 || ageAsInt > 100 {
+            showPopUpWindow = true
+            errorMessage = "Invalid age!"
+            response(false)
+            return
+        }
+        
+        if registerModel.profession == "" {
+            showPopUpWindow = true
+            errorMessage = "Invalid proffession"
+            response(false)
+            return
+        }
+        
         FirebaseManager.instance.auth.createUser(withEmail: registerModel.email, password: registerModel.password) { result, error in
             if let error = error {
                 showPopUpWindow = true
                 errorMessage = error.localizedDescription.description
                 response(false)
+                return
             }
-            else {
-                response(true)
+            
+            guard let userUid = result?.user.uid else {
+                errorMessage = "Server error - registration unsuccessful!"
+                response(false)
+                return
             }
+            
+            FirebaseManager.instance.firestore.collection("users").addDocument(data: ["uid": userUid,
+                                                                                      "name": registerModel.name,
+                                                                                      "age": ageAsInt,
+                                                                                      "proffession": registerModel.profession])
+            { error in
+                if error != nil {
+                    FirebaseManager.instance.auth.currentUser?.delete()
+                    showPopUpWindow = true
+                    errorMessage = "Server error - registration unsuccessful!"
+                    response(false)
+                    return
+                }
+            }
+            
+            response(true)
         }
     }
     

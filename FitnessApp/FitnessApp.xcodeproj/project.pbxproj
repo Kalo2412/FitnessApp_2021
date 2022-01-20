@@ -9,12 +9,13 @@
 /* Begin PBXBuildFile section */
 		03635F982798352400FD4F61 /* HomePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03635F972798352400FD4F61 /* HomePageView.swift */; };
 		03CA0F05279979EE00EF5EF7 /* PopUpWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CA0F04279979EE00EF5EF7 /* PopUpWindow.swift */; };
+		03CA0F092799940300EF5EF7 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 03CA0F082799940300EF5EF7 /* FirebaseAuth */; };
+		03CA0F0B2799940300EF5EF7 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 03CA0F0A2799940300EF5EF7 /* FirebaseFirestore */; };
+		03CA0F0D2799940300EF5EF7 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 03CA0F0C2799940300EF5EF7 /* FirebaseStorage */; };
 		03DFBA582796BBBA005C7473 /* FitnessAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DFBA572796BBBA005C7473 /* FitnessAppApp.swift */; };
 		03DFBA5A2796BBBA005C7473 /* RegisterAndLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DFBA592796BBBA005C7473 /* RegisterAndLoginView.swift */; };
 		03DFBA5C2796BBC2005C7473 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03DFBA5B2796BBC2005C7473 /* Assets.xcassets */; };
 		03DFBA5F2796BBC2005C7473 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03DFBA5E2796BBC2005C7473 /* Preview Assets.xcassets */; };
-		03DFBA6D2796FC1C005C7473 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 03DFBA6C2796FC1C005C7473 /* FirebaseAuth */; };
-		03DFBA6F2796FC1C005C7473 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 03DFBA6E2796FC1C005C7473 /* FirebaseStorage */; };
 		03DFBA722796FC70005C7473 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DFBA712796FC70005C7473 /* FirebaseManager.swift */; };
 		03DFBA7627970BFA005C7473 /* RegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DFBA7527970BF9005C7473 /* RegisterModel.swift */; };
 		03DFBA7927970C79005C7473 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DFBA7827970C79005C7473 /* LoginModel.swift */; };
@@ -43,8 +44,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				03DFBA6D2796FC1C005C7473 /* FirebaseAuth in Frameworks */,
-				03DFBA6F2796FC1C005C7473 /* FirebaseStorage in Frameworks */,
+				03CA0F092799940300EF5EF7 /* FirebaseAuth in Frameworks */,
+				03CA0F0B2799940300EF5EF7 /* FirebaseFirestore in Frameworks */,
+				03CA0F0D2799940300EF5EF7 /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,8 +137,9 @@
 			);
 			name = FitnessApp;
 			packageProductDependencies = (
-				03DFBA6C2796FC1C005C7473 /* FirebaseAuth */,
-				03DFBA6E2796FC1C005C7473 /* FirebaseStorage */,
+				03CA0F082799940300EF5EF7 /* FirebaseAuth */,
+				03CA0F0A2799940300EF5EF7 /* FirebaseFirestore */,
+				03CA0F0C2799940300EF5EF7 /* FirebaseStorage */,
 			);
 			productName = FitnessApp;
 			productReference = 03DFBA542796BBB9005C7473 /* FitnessApp.app */;
@@ -166,7 +169,7 @@
 			);
 			mainGroup = 03DFBA4B2796BBB9005C7473;
 			packageReferences = (
-				03DFBA6B2796FC1C005C7473 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				03CA0F072799940300EF5EF7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 03DFBA552796BBB9005C7473 /* Products */;
 			projectDirPath = "";
@@ -391,25 +394,30 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		03DFBA6B2796FC1C005C7473 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+		03CA0F072799940300EF5EF7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 8.10.0;
+				minimumVersion = 8.11.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		03DFBA6C2796FC1C005C7473 /* FirebaseAuth */ = {
+		03CA0F082799940300EF5EF7 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 03DFBA6B2796FC1C005C7473 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 03CA0F072799940300EF5EF7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
 		};
-		03DFBA6E2796FC1C005C7473 /* FirebaseStorage */ = {
+		03CA0F0A2799940300EF5EF7 /* FirebaseFirestore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 03DFBA6B2796FC1C005C7473 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			package = 03CA0F072799940300EF5EF7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		03CA0F0C2799940300EF5EF7 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 03CA0F072799940300EF5EF7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
 		};
 /* End XCSwiftPackageProductDependency section */
