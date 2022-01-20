@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RegisterAndLoginView: View {
-    @State private var isLoginMode = true
+    @State private var isLoginMode: Bool
     
     @State private var registerModel = RegisterViewModel()
     @State private var loginModel = LoginViewModel()
@@ -18,6 +18,10 @@ struct RegisterAndLoginView: View {
     
     @State private var isActiveForLogin = false
     @State private var isActiveForRegister = false
+    
+    init(isLogin: Bool) {
+        self._isLoginMode = State(initialValue: isLogin)
+    }
 
     var body: some View {
         NavigationView {
@@ -217,7 +221,9 @@ struct RegisterAndLoginView: View {
 
 struct RegisterAndLoginView_Previews: PreviewProvider {
     static var previews: some View {
-        RegisterAndLoginView()
+        RegisterAndLoginView(isLogin: true)
+        RegisterAndLoginView(isLogin: false)
+        
     }
 }
 

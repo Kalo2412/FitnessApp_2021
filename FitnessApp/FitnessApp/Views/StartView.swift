@@ -22,7 +22,7 @@ struct StartView: View {
                         .font(.system(size: 60, weight: .bold, design: .monospaced))
                         .foregroundColor(.white)
                     Spacer()
-                    NavigationLink(destination: RegisterAndLoginView().navigationBarBackButtonHidden(true)) {
+                    NavigationLink(destination: RegisterAndLoginView(isLogin: true).navigationBarBackButtonHidden(true)) {
                         HStack {
                             Image(systemName: "person")
                                 .font(.title)
@@ -37,7 +37,7 @@ struct StartView: View {
                         .cornerRadius(40)
                         .shadow(radius: 5.0)
                     }
-                    NavigationLink(destination: RegisterAndLoginView().navigationBarBackButtonHidden(true)) {
+                    NavigationLink(destination: RegisterAndLoginView(isLogin: false).navigationBarBackButtonHidden(true)) {
                         HStack {
                             Image(systemName: "rectangle.and.pencil.and.ellipsis")
                                 .font(.title)
