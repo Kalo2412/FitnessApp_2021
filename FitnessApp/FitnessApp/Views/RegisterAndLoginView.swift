@@ -67,7 +67,7 @@ struct RegisterAndLoginView: View {
                                 
                                 Spacer()
                                 
-                                NavigationLink(destination: HomePageView(), isActive: $isActiveForLogin) {
+                                NavigationLink(destination: MainView(), isActive: $isActiveForLogin) {
                                     Button (action: {
                                         login() { isLoggedIn in
                                             self.isActiveForLogin = isLoggedIn
@@ -132,7 +132,7 @@ struct RegisterAndLoginView: View {
                                 
                                 Spacer()
                                 
-                                NavigationLink(destination: HomePageView(), isActive: $isActiveForRegister) {
+                                NavigationLink(destination: MainView(), isActive: $isActiveForRegister) {
                                     Button (action: {
                                         register() { isRegistered in
                                             self.isActiveForRegister = isRegistered

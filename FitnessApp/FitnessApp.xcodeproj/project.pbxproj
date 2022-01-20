@@ -12,6 +12,9 @@
 		03CA0F092799940300EF5EF7 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 03CA0F082799940300EF5EF7 /* FirebaseAuth */; };
 		03CA0F0B2799940300EF5EF7 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 03CA0F0A2799940300EF5EF7 /* FirebaseFirestore */; };
 		03CA0F0D2799940300EF5EF7 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 03CA0F0C2799940300EF5EF7 /* FirebaseStorage */; };
+		03CA0F102799AD0200EF5EF7 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CA0F0F2799AD0200EF5EF7 /* MainView.swift */; };
+		03CA0F132799AF3000EF5EF7 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CA0F122799AF3000EF5EF7 /* ProfileView.swift */; };
+		03CA0F162799B17800EF5EF7 /* TrainingsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CA0F152799B17700EF5EF7 /* TrainingsListView.swift */; };
 		03DFBA582796BBBA005C7473 /* FitnessAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DFBA572796BBBA005C7473 /* FitnessAppApp.swift */; };
 		03DFBA5A2796BBBA005C7473 /* RegisterAndLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DFBA592796BBBA005C7473 /* RegisterAndLoginView.swift */; };
 		03DFBA5C2796BBC2005C7473 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03DFBA5B2796BBC2005C7473 /* Assets.xcassets */; };
@@ -26,6 +29,9 @@
 /* Begin PBXFileReference section */
 		03635F972798352400FD4F61 /* HomePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageView.swift; sourceTree = "<group>"; };
 		03CA0F04279979EE00EF5EF7 /* PopUpWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpWindow.swift; sourceTree = "<group>"; };
+		03CA0F0F2799AD0200EF5EF7 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		03CA0F122799AF3000EF5EF7 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		03CA0F152799B17700EF5EF7 /* TrainingsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingsListView.swift; sourceTree = "<group>"; };
 		03DFBA542796BBB9005C7473 /* FitnessApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FitnessApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03DFBA572796BBBA005C7473 /* FitnessAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessAppApp.swift; sourceTree = "<group>"; };
 		03DFBA592796BBBA005C7473 /* RegisterAndLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterAndLoginView.swift; sourceTree = "<group>"; };
@@ -108,6 +114,9 @@
 				D8418CD227977D2000CFC20B /* StartView.swift */,
 				03635F972798352400FD4F61 /* HomePageView.swift */,
 				03CA0F04279979EE00EF5EF7 /* PopUpWindow.swift */,
+				03CA0F0F2799AD0200EF5EF7 /* MainView.swift */,
+				03CA0F122799AF3000EF5EF7 /* ProfileView.swift */,
+				03CA0F152799B17700EF5EF7 /* TrainingsListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -199,6 +208,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				03CA0F05279979EE00EF5EF7 /* PopUpWindow.swift in Sources */,
+				03CA0F162799B17800EF5EF7 /* TrainingsListView.swift in Sources */,
+				03CA0F102799AD0200EF5EF7 /* MainView.swift in Sources */,
+				03CA0F132799AF3000EF5EF7 /* ProfileView.swift in Sources */,
 				03DFBA722796FC70005C7473 /* FirebaseManager.swift in Sources */,
 				03DFBA7627970BFA005C7473 /* RegisterModel.swift in Sources */,
 				03DFBA7927970C79005C7473 /* LoginModel.swift in Sources */,
