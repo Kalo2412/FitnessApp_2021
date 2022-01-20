@@ -27,6 +27,7 @@ struct MainView: View {
             
         }
         .navigationBarBackButtonHidden(true)
+        .accentColor(Color("darkGreen"))
     }
 }
 
