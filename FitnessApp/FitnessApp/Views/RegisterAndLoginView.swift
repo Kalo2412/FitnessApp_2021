@@ -10,8 +10,8 @@ import SwiftUI
 struct RegisterAndLoginView: View {
     @State private var isLoginMode: Bool
     
-    @State private var registerModel = RegisterViewModel()
-    @State private var loginModel = LoginViewModel()
+    @State private var registerModel = RegisterModel()
+    @State private var loginModel = LoginModel()
     
     @State private var loginErrorMessage = ""
     @State private var registerErrorMessage = ""
@@ -185,9 +185,8 @@ struct RegisterAndLoginView: View {
     }
     
     private func login(response: @escaping (_ isLoggedIn: Bool) -> Void) {
-        UserManager.loginUser(email: loginModel.email, password: loginModel.password) {
-            isLoggedIn in
-            if !isLoggedIn {
+        FirebaseManager.instance.auth.signIn(withEmail: loginModel.email, password: loginModel.password) { result, error in
+            if error != nil {
                 loginErrorMessage = "Incorrect email or password"
                 response(false)
             }
@@ -198,10 +197,9 @@ struct RegisterAndLoginView: View {
     }
     
     private func register(response: @escaping (_ isRegistered: Bool) -> Void){
-        UserManager.registerUser(email: registerModel.email, password: registerModel.password) {
-            isRegistered, errorMessage in
-            if !isRegistered {
-                registerErrorMessage = errorMessage
+        FirebaseManager.instance.auth.createUser(withEmail: registerModel.email, password: registerModel.password) { result, error in
+            if let error = error {
+                registerErrorMessage = error.localizedDescription.description
                 response(false)
             }
             else {

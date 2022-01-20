@@ -1,11 +1,11 @@
 //
-//  LoginViewModel.swift
+//  LoginModel.swift
 //  FitnessApp
 //
 //  Created by Stefania Tsvetkova on 1/18/22.
 //
 
-struct LoginViewModel {
+struct LoginModel {
     var email: String
     var password: String
     
