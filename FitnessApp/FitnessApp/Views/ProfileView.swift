@@ -16,12 +16,6 @@ struct ProfileView: View {
     
     init(userUid: String) {
         user = UserModel(uid: userUid)
-        
-        //data for the preview this:
-        /*user.name = "Ivan"
-        user.email = "ivan@gmail.com"
-        user.age = "25"
-        user.profession = "Influencer"*/
     }
     
     var body: some View {
@@ -46,7 +40,6 @@ struct ProfileView: View {
                             NavigationLink(destination: StartView().navigationBarBackButtonHidden(true), isActive: $isActiveForSignOut) {
                                 Button {
                                     if signOut() {
-                                        print("dano e nil -> \(FirebaseManager.instance.auth.currentUser?.uid)")
                                         isActiveForSignOut = true
                                     }
                                     else {
@@ -67,8 +60,6 @@ struct ProfileView: View {
                 Text(user.name)
                     .font(.system(size: 20, weight: .bold, design: .monospaced))
                     .foregroundColor(Color.black)
-                
-                // TODO: logout button
                 
                 VStack {
                     HStack {
