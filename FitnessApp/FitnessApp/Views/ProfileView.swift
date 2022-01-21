@@ -8,12 +8,11 @@
 import SwiftUI
 
 struct ProfileView: View {
-    @State var user: UserModel //= UserModel(uid: FirebaseManager.instance.auth.currentUser?.uid ?? "")
+    @State var user: UserModel
     
     @State private var showPopUpWindow = false
     
     @State private var isActiveForSignOut = false
-    @State private var isActiveForFriendProfile = false
     
     init(userUid: String) {
         _user = State(initialValue: UserModel(uid: userUid))
@@ -127,10 +126,9 @@ struct ProfileView: View {
                         .padding(.bottom, 5)
                         
                         List(user.friends) { friend in
-                            NavigationLink(destination: ProfileView(userUid: friend.uid), isActive: $isActiveForFriendProfile) {
+                            NavigationLink(destination: ProfileView(userUid: friend.uid)) {
                                 HStack {
                                     Button {
-                                        isActiveForFriendProfile = true
                                     } label: {
                                         HStack {
                                             Image(systemName: "person.crop.circle")
