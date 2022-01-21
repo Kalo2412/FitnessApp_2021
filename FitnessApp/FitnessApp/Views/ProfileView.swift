@@ -150,6 +150,7 @@ struct ProfileView: View {
                 .ignoresSafeArea()
             
         }
+        .navigationBarHidden(true)
     }
     
     private func signOut() -> Bool {

@@ -57,10 +57,11 @@ struct StartView: View {
                     }
                 }
                 .frame(width: 300, height: 600)
-                .navigationBarHidden(true)
+                //.navigationBarHidden(true)
                 .navigationTitle("")
             }
         }
+        .navigationBarHidden(true)
     }
 }
 

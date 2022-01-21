@@ -182,6 +182,7 @@ struct RegisterAndLoginView: View {
                 }
                 .ignoresSafeArea()
         }
+        .navigationBarHidden(true)
     }
     
     private func login(response: @escaping (_ isLoggedIn: Bool) -> Void) {

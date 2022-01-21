@@ -25,7 +25,7 @@ struct MainView: View {
                     Label("Profile", systemImage: "person.fill")
                 }
         }
-        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
         .accentColor(Color("darkGreen"))
     }
 }
