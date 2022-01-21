@@ -122,7 +122,17 @@ struct ProfileView: View {
                     }
                     .padding(.bottom, 5)
                     
-                    // TODO: display friends
+                    List(user.friends) { friend in
+                        HStack {
+                            Image(systemName: "person.crop.circle")
+                                .font(.system(size: 30))
+                            
+                            Text(friend.name)
+                                .font(.system(size: 20))
+                            
+                            Spacer()
+                        }
+                    }
                 }
                 .padding()
                 .overlay(
@@ -130,7 +140,6 @@ struct ProfileView: View {
                     .stroke(Color("darkGreen"), lineWidth: 2)
                 )
                 .padding()
-                .frame(maxHeight: .infinity, alignment: .top)
             }
             .blur(radius: showPopUpWindow ? 3 : 0)
         

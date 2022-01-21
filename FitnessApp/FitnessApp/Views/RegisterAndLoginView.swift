@@ -234,19 +234,35 @@ struct RegisterAndLoginView: View {
                 return
             }
             
+            var isThereError = false
+            
             FirebaseManager.instance.firestore.collection("users").document(userUid)
                 .setData(["email": registerModel.email,
                           "name": registerModel.name,
                           "age": ageAsInt,
                           "proffession": registerModel.profession])
-            { error in
-                if error != nil {
-                    FirebaseManager.instance.auth.currentUser?.delete()
-                    showPopUpWindow = true
-                    errorMessage = "Server error - registration unsuccessful!"
-                    response(false)
-                    return
+                { error in
+                    if error != nil {
+                        isThereError = true
+                    }
                 }
+            
+            if !isThereError {
+                FirebaseManager.instance.firestore.collection("friends").document(userUid)
+                    .setData(["count": 0])
+                    { error in
+                        if error != nil {
+                            isThereError = true
+                        }
+                    }
+            }
+            
+            if isThereError {
+                FirebaseManager.instance.auth.currentUser?.delete()
+                showPopUpWindow = true
+                errorMessage = "Server error - registration unsuccessful!"
+                response(false)
+                return
             }
             
             response(true)
