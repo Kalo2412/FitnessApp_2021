@@ -144,6 +144,7 @@ struct ProfileView: View {
                                 }
                             }
                         }
+                        .listStyle(InsetListStyle())
                     }
                     .padding()
                     .overlay(
