@@ -39,8 +39,8 @@ struct ProfileView: View {
                         if user.uid == FirebaseManager.instance.auth.currentUser?.uid {
                             Spacer()
                             
-                            VStack {
-                                NavigationLink(destination: StartView().navigationBarBackButtonHidden(true), isActive: $isActiveForSignOut) {
+                            NavigationLink(destination: StartView().navigationBarBackButtonHidden(true), isActive: $isActiveForSignOut) {
+                                VStack {
                                     Button {
                                         if signOut() {
                                             isActiveForSignOut = true
@@ -54,8 +54,8 @@ struct ProfileView: View {
                                     }
                                     .frame(maxWidth: .infinity, alignment: .trailing)
                                 }
+                                .frame(maxHeight: 80, alignment: .top)
                             }
-                            .frame(maxHeight: 80, alignment: .top)
                         }
                     }
                     .padding()
@@ -150,6 +150,8 @@ struct ProfileView: View {
                         .stroke(Color("darkGreen"), lineWidth: 2)
                     )
                     .padding()
+                    
+                    Spacer()
                 }
                 .blur(radius: showPopUpWindow ? 3 : 0)
             
