@@ -17,6 +17,8 @@ struct ProfileView: View {
     
     init(userUid: String) {
         _user = State(initialValue: UserModel(uid: userUid))
+        
+        UITableView.appearance().backgroundColor = .clear
     }
     
     var body: some View {
