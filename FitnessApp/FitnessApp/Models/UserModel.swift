@@ -5,6 +5,8 @@
 //  Created by Stefania Tsvetkova on 1/20/22.
 //
 
+import SwiftUI
+
 class UserModel {
     var uid: String = FirebaseManager.instance.auth.currentUser?.uid ?? ""
     var email: String = ""
@@ -12,6 +14,7 @@ class UserModel {
     var age: String = ""
     var profession: String = ""
     var friends: [FriendModel] = []
+    var profilePicture: UIImage? = nil
     
     init(uid: String) {
         
@@ -30,12 +33,6 @@ class UserModel {
                     self.name = data["name"] as? String ?? ""
                     self.age = String(data["age"] as? Int ?? 0)
                     self.profession = data["profession"] as? String ?? ""
-                    
-                    /*var friendIndex = 1
-                    while let friendUid = data["friend#\(friendIndex)"] as? String  {
-                        self.friends.append(FriendModel(uid: friendUid))
-                        friendIndex += 1
-                    }*/
                 }
                 
                 let friendsDocument = FirebaseManager.instance.firestore.collection("friends").document(uid)
@@ -57,6 +54,17 @@ class UserModel {
                     }
                 }
             }
+            
+            let ref = FirebaseManager.instance.storage.reference(withPath: uid)
+            
+            let maxSize: Int64 = 10 * 1024 * 1024 // 10MB
+            ref.getData(maxSize: maxSize) { data, error in
+                if  error != nil {
+                    return
+                }
+                
+                self.profilePicture = data.flatMap(UIImage.init)
+            }
         }
     }
 }
@@ -64,6 +72,7 @@ class UserModel {
 class FriendModel: Identifiable {
     var uid: String = ""
     var name: String = ""
+    var profilePicture: UIImage? = nil
     
     init(uid: String) {
         if uid != "" {
@@ -77,6 +86,17 @@ class FriendModel: Identifiable {
                     self.uid = uid
                     self.name = data["name"] as? String ?? ""
                 }
+            }
+            
+            let ref = FirebaseManager.instance.storage.reference(withPath: uid)
+            
+            let maxSize: Int64 = 10 * 1024 * 1024 // 10MB
+            ref.getData(maxSize: maxSize) { data, error in
+                if  error != nil {
+                    return
+                }
+                
+                self.profilePicture = data.flatMap(UIImage.init)
             }
         }
     }

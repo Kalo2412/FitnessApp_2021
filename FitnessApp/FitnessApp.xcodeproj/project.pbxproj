@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		035F3BBF279DC71600C58537 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035F3BBE279DC71600C58537 /* ImagePicker.swift */; };
 		03635F982798352400FD4F61 /* HomePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03635F972798352400FD4F61 /* HomePageView.swift */; };
 		03C2511F2799FE8300C0897F /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C2511E2799FE8300C0897F /* UserModel.swift */; };
 		03CA0F05279979EE00EF5EF7 /* PopUpWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CA0F04279979EE00EF5EF7 /* PopUpWindow.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		035F3BBE279DC71600C58537 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		03635F972798352400FD4F61 /* HomePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageView.swift; sourceTree = "<group>"; };
 		03C2511E2799FE8300C0897F /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		03CA0F04279979EE00EF5EF7 /* PopUpWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpWindow.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				03DFBA712796FC70005C7473 /* FirebaseManager.swift */,
+				035F3BBE279DC71600C58537 /* ImagePicker.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				035F3BBF279DC71600C58537 /* ImagePicker.swift in Sources */,
 				03CA0F05279979EE00EF5EF7 /* PopUpWindow.swift in Sources */,
 				03CA0F162799B17800EF5EF7 /* TrainingsListView.swift in Sources */,
 				03CA0F102799AD0200EF5EF7 /* MainView.swift in Sources */,

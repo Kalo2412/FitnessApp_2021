@@ -11,8 +11,12 @@ struct ProfileView: View {
     @State var user: UserModel
     
     @State private var showPopUpWindow = false
+    @State private var errorMessage = ""
     
     @State private var isActiveForSignOut = false
+    
+    @State private var showImagePicker = false
+    @State private var image: UIImage = UIImage()
     
     init(userUid: String) {
         _user = State(initialValue: UserModel(uid: userUid))
@@ -28,15 +32,29 @@ struct ProfileView: View {
                         if user.uid == FirebaseManager.instance.auth.currentUser?.uid {
                             Spacer()
                             .frame(maxWidth: .infinity, alignment: .leading)
-                        }
                         
-                        Image(systemName: "person.crop.circle")
-                            .renderingMode(.original)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 80, height: 80, alignment: .center)
-                        
-                        if user.uid == FirebaseManager.instance.auth.currentUser?.uid {
+                            Button {
+                                showImagePicker = true
+                            } label: {
+                                if let profilePicture = user.profilePicture {
+                                    Image(uiImage: profilePicture)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 80, height: 80)
+                                        .cornerRadius(40)
+                                        .overlay(Circle()
+                                                    .stroke(Color.black, lineWidth: 2)
+                                                    .frame(width: 80, height: 80))
+                                    
+                                }
+                                else {
+                                    Image(systemName: "person.crop.circle")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 80, height: 80)
+                                }
+                            }
+                            
                             Spacer()
                             
                             NavigationLink(destination: StartView().navigationBarBackButtonHidden(true), isActive: $isActiveForSignOut) {
@@ -47,6 +65,7 @@ struct ProfileView: View {
                                         }
                                         else {
                                             showPopUpWindow = true
+                                            errorMessage = "There was an error. Try signing out later."
                                         }
                                     } label: {
                                         Text("Sign out")
@@ -55,6 +74,25 @@ struct ProfileView: View {
                                     .frame(maxWidth: .infinity, alignment: .trailing)
                                 }
                                 .frame(maxHeight: 80, alignment: .top)
+                            }
+                        }
+                        else {
+                            if let profilePicture = user.profilePicture {
+                                Image(uiImage: profilePicture)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 80, height: 80)
+                                    .cornerRadius(40)
+                                    .overlay(Circle()
+                                                .stroke(Color.black, lineWidth: 2)
+                                                .frame(width: 80, height: 80))
+                                
+                            }
+                            else {
+                                Image(systemName: "person.crop.circle")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 80, height: 80)
                             }
                         }
                     }
@@ -131,8 +169,23 @@ struct ProfileView: View {
                                     Button {
                                     } label: {
                                         HStack {
-                                            Image(systemName: "person.crop.circle")
-                                                .font(.system(size: 30))
+                                            if let profilePicture = friend.profilePicture {
+                                                Image(uiImage: profilePicture)
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .frame(width: 30, height: 30)
+                                                    .cornerRadius(15)
+                                                    .overlay(Circle()
+                                                                .stroke(Color.black, lineWidth: 1)
+                                                                .frame(width: 30, height: 30))
+                                                
+                                            }
+                                            else {
+                                                Image(systemName: "person.crop.circle")
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .frame(width: 30, height: 30)
+                                            }
                                                 
                                             Text(friend.name)
                                                 .font(.system(size: 20))
@@ -155,7 +208,7 @@ struct ProfileView: View {
                 }
                 .blur(radius: showPopUpWindow ? 3 : 0)
             
-                PopUpWindow(title: "Error", message: "There was an error. Try signing out later.", buttonText: "Okay", show: $showPopUpWindow)
+                PopUpWindow(title: "Error", message: errorMessage, buttonText: "Okay", show: $showPopUpWindow)
                     .alignmentGuide(.top) {
                         $0[VerticalAlignment.center]
                     }
@@ -163,8 +216,59 @@ struct ProfileView: View {
                 
             }
             .navigationBarHidden(true)
+            
         }
         .navigationBarHidden(user.uid == FirebaseManager.instance.auth.currentUser?.uid)
+        .fullScreenCover(isPresented: $showImagePicker, onDismiss: nil) {
+            ImagePicker(sourceType: .photoLibrary, completionHandler: didSelectImage)
+        }
+    }
+    
+    func didSelectImage(_ image: UIImage?) {
+        showImagePicker = false
+        
+        if let image = image {
+            updateProfilePicture(image: image) { isUpdated in
+                if !isUpdated {
+                    showPopUpWindow = true
+                    errorMessage = "There was an error. Profile picture cannot be saved."
+                }
+            }
+        }
+    }
+    
+    private func updateProfilePicture(image: UIImage, response: @escaping (_ isUpdated: Bool) -> Void) {
+        guard let uid = FirebaseManager.instance.auth.currentUser?.uid else {
+            response(false)
+            return
+        }
+        
+        let ref = FirebaseManager.instance.storage.reference(withPath: uid)
+        
+        guard let imageData = image.jpegData(compressionQuality: 0.5) else {
+            response(false)
+            return
+        }
+        
+        ref.putData(imageData, metadata: nil) { metadata, error in
+            if error != nil {
+                response(false)
+                return
+            }
+            
+            ref.downloadURL { url, error in
+                if error != nil {
+                    response(false)
+                    return
+                }
+                else {
+                    
+                }
+            }
+        }
+        
+        user.profilePicture = image
+        response(true)
     }
     
     private func signOut() -> Bool {

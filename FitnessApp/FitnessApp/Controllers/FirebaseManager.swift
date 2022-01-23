@@ -11,6 +11,7 @@ import FirebaseFirestore
 class FirebaseManager: NSObject {
     public let auth: Auth
     public let firestore: Firestore
+    public let storage: Storage
     
     public static let instance = FirebaseManager()
     
@@ -19,6 +20,7 @@ class FirebaseManager: NSObject {
         
         self.auth = Auth.auth()
         self.firestore = Firestore.firestore()
+        self.storage = Storage.storage()
         
         super.init()
     }
