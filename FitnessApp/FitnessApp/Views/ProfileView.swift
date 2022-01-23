@@ -39,7 +39,7 @@ struct ProfileView: View {
                                 if let profilePicture = user.profilePicture {
                                     Image(uiImage: profilePicture)
                                         .resizable()
-                                        .scaledToFit()
+                                        .scaledToFill()
                                         .frame(width: 80, height: 80)
                                         .cornerRadius(40)
                                         .overlay(Circle()
@@ -50,7 +50,7 @@ struct ProfileView: View {
                                 else {
                                     Image(systemName: "person.crop.circle")
                                         .resizable()
-                                        .scaledToFit()
+                                        .scaledToFill()
                                         .frame(width: 80, height: 80)
                                 }
                             }
@@ -80,7 +80,7 @@ struct ProfileView: View {
                             if let profilePicture = user.profilePicture {
                                 Image(uiImage: profilePicture)
                                     .resizable()
-                                    .scaledToFit()
+                                    .scaledToFill()
                                     .frame(width: 80, height: 80)
                                     .cornerRadius(40)
                                     .overlay(Circle()
@@ -91,7 +91,7 @@ struct ProfileView: View {
                             else {
                                 Image(systemName: "person.crop.circle")
                                     .resizable()
-                                    .scaledToFit()
+                                    .scaledToFill()
                                     .frame(width: 80, height: 80)
                             }
                         }
@@ -172,7 +172,7 @@ struct ProfileView: View {
                                             if let profilePicture = friend.profilePicture {
                                                 Image(uiImage: profilePicture)
                                                     .resizable()
-                                                    .scaledToFit()
+                                                    .scaledToFill()
                                                     .frame(width: 30, height: 30)
                                                     .cornerRadius(15)
                                                     .overlay(Circle()
@@ -183,7 +183,7 @@ struct ProfileView: View {
                                             else {
                                                 Image(systemName: "person.crop.circle")
                                                     .resizable()
-                                                    .scaledToFit()
+                                                    .scaledToFill()
                                                     .frame(width: 30, height: 30)
                                             }
                                                 
