@@ -8,22 +8,30 @@
 import SwiftUI
 
 struct MainView: View {
+    @EnvironmentObject var stateManager: StateManager
+    
     var body: some View {
-        TabView {
+        TabView(selection: $stateManager.selection) {
             HomePageView()
                 .tabItem {
                     Label("Home", systemImage: "house.fill")
                 }
+                .tag(1)
+                .onAppear(perform: {
+                    print("TEST: \(stateManager.rootViewIsShownWhenLogOutForRegister)")
+                })
             
             TrainingsListView()
                 .tabItem {
                     Label("Trainings", systemImage: "list.bullet")
                 }
+                .tag(2)
             
             ProfileView(userUid: FirebaseManager.instance.auth.currentUser?.uid as? String ?? "")
                 .tabItem {
                     Label("Profile", systemImage: "person.fill")
                 }
+                .tag(3)
         }
         .navigationBarHidden(true)
         .accentColor(Color("darkGreen"))
@@ -33,5 +41,6 @@ struct MainView: View {
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         MainView()
+            .environmentObject(StateManager())
     }
 }

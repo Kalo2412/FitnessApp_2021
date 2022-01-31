@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RegisterAndLoginView: View {
-    @State private var isLoginMode: Bool
+    @EnvironmentObject var stateManager: StateManager
     
     @State private var registerModel = RegisterModel()
     @State private var loginModel = LoginModel()
@@ -19,9 +19,8 @@ struct RegisterAndLoginView: View {
     @State private var isActiveForLogin = false
     @State private var isActiveForRegister = false
     
-    init(isLogin: Bool) {
-        self._isLoginMode = State(initialValue: isLogin)
-    }
+
+    
 
     var body: some View {
         ZStack {
@@ -47,7 +46,7 @@ struct RegisterAndLoginView: View {
                                 
                             Spacer()
                             
-                            if isLoginMode {
+                            if stateManager.isLoginMode {
                                 Group {
                                     TextField("", text: $loginModel.email)
                                         .keyboardType(.emailAddress)
@@ -67,7 +66,7 @@ struct RegisterAndLoginView: View {
                                 
                                 Spacer()
                                 
-                                NavigationLink(destination: MainView(), isActive: $isActiveForLogin) {
+                                NavigationLink(destination: MainView().navigationBarBackButtonHidden(true), isActive: $isActiveForLogin) {
                                     Button (action: {
                                         login() { isLoggedIn in
                                             self.isActiveForLogin = isLoggedIn
@@ -92,7 +91,7 @@ struct RegisterAndLoginView: View {
                                         .foregroundColor(Color.white)
                                     
                                     Button {
-                                        changeModeToRegister()
+                                        stateManager.isLoginMode = false
                                     } label: {
                                             Text("Register")
                                                 .foregroundColor(Color.white)
@@ -132,7 +131,7 @@ struct RegisterAndLoginView: View {
                                 
                                 Spacer()
                                 
-                                NavigationLink(destination: MainView(), isActive: $isActiveForRegister) {
+                                NavigationLink(destination: MainView().navigationBarBackButtonHidden(true), isActive: $isActiveForRegister) {
                                     Button (action: {
                                         register() { isRegistered in
                                             self.isActiveForRegister = isRegistered
@@ -157,7 +156,7 @@ struct RegisterAndLoginView: View {
                                         .foregroundColor(Color.white)
                                     
                                     Button {
-                                        changeModeToLogin()
+                                        stateManager.isLoginMode = true
                                     } label: {
                                             Text("Log in")
                                                 .foregroundColor(Color.white)
@@ -270,20 +269,13 @@ struct RegisterAndLoginView: View {
         }
     }
     
-    private func changeModeToLogin() {
-        isLoginMode = true
-    }
     
-    private func changeModeToRegister() {
-        isLoginMode = false
-    }
 }
 
 struct RegisterAndLoginView_Previews: PreviewProvider {
     static var previews: some View {
-        RegisterAndLoginView(isLogin: true)
-        RegisterAndLoginView(isLogin: false)
-        
+        RegisterAndLoginView()
+            .environmentObject(StateManager())
     }
 }
 

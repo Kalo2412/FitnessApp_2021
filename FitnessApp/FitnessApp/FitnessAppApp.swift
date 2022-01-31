@@ -9,9 +9,14 @@ import SwiftUI
 
 @main
 struct FitnessAppApp: App {
+    @StateObject var stateManager = StateManager()
     var body: some Scene {
         WindowGroup {
             StartView()
+                .environmentObject(stateManager)
+                .onAppear(perform: {
+                    print("TEST: \(stateManager.rootViewIsShownWhenLogOutForRegister)")
+                })
         }
     }
 }

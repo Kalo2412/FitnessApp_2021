@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @EnvironmentObject var stateManager: StateManager
     @State var user: UserModel
     
     @State private var showPopUpWindow = false
@@ -22,6 +23,7 @@ struct ProfileView: View {
         _user = State(initialValue: UserModel(uid: userUid))
         
         UITableView.appearance().backgroundColor = .clear
+        
     }
     
     var body: some View {
@@ -45,7 +47,6 @@ struct ProfileView: View {
                                         .overlay(Circle()
                                                     .stroke(Color.black, lineWidth: 2)
                                                     .frame(width: 80, height: 80))
-                                    
                                 }
                                 else {
                                     Image(systemName: "person.crop.circle")
@@ -57,24 +58,23 @@ struct ProfileView: View {
                             
                             Spacer()
                             
-                            NavigationLink(destination: StartView().navigationBarBackButtonHidden(true), isActive: $isActiveForSignOut) {
-                                VStack {
-                                    Button {
-                                        if signOut() {
-                                            isActiveForSignOut = true
-                                        }
-                                        else {
-                                            showPopUpWindow = true
-                                            errorMessage = "There was an error. Try signing out later."
-                                        }
-                                    } label: {
-                                        Text("Sign out")
-                                            .foregroundColor(Color("darkGreen"))
+                            VStack {
+                                Button {
+                                    if signOut() {
+                                        stateManager.rootViewIsShownWhenLogOut = false
+                                        stateManager.rootViewIsShownWhenLogOutForRegister = false
                                     }
-                                    .frame(maxWidth: .infinity, alignment: .trailing)
+                                    else {
+                                        showPopUpWindow = true
+                                        errorMessage = "There was an error. Try signing out later."
+                                    }
+                                } label: {
+                                    Text("Sign out")
+                                        .foregroundColor(Color("darkGreen"))
                                 }
-                                .frame(maxHeight: 80, alignment: .top)
+                                .frame(maxWidth: .infinity, alignment: .trailing)
                             }
+                            .frame(maxHeight: 80, alignment: .top)
                         }
                         else {
                             if let profilePicture = user.profilePicture {
@@ -285,5 +285,6 @@ struct ProfileView: View {
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView(userUid: "")
+            .environmentObject(StateManager())
     }
 }

@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct StartView: View {
-    @State private var isActivated = false
+    
+    @EnvironmentObject var stateManager: StateManager
+    @State var isRegister: Bool = false
     
     var body: some View {
         NavigationView {
@@ -22,7 +24,7 @@ struct StartView: View {
                         .font(.system(size: 60, weight: .bold, design: .monospaced))
                         .foregroundColor(.white)
                     Spacer()
-                    NavigationLink(destination: RegisterAndLoginView(isLogin: true).navigationBarBackButtonHidden(true)) {
+                    NavigationLink(destination: RegisterAndLoginView().navigationBarBackButtonHidden(true),isActive: $stateManager.rootViewIsShownWhenLogOut) {
                         HStack {
                             Image(systemName: "person")
                                 .font(.title)
@@ -37,36 +39,45 @@ struct StartView: View {
                         .cornerRadius(40)
                         .shadow(radius: 5.0)
                     }
-                    NavigationLink(destination: RegisterAndLoginView(isLogin: false).navigationBarBackButtonHidden(true)) {
-                        HStack {
-                            Image(systemName: "rectangle.and.pencil.and.ellipsis")
-                                .font(.title)
-                            Text("Register")
-                                .fontWeight(.semibold)
-                                .font(.title)
+                    NavigationLink(destination:RegisterAndLoginView().navigationBarBackButtonHidden(true),isActive: $stateManager.rootViewIsShownWhenLogOutForRegister) {
+                        Button(action: {
+                            stateManager.isLoginMode = false
+                            stateManager.rootViewIsShownWhenLogOutForRegister = true
+                        }){
+                            HStack {
+                                Image(systemName: "rectangle.and.pencil.and.ellipsis")
+                                    .font(.title)
+                                Text("Register")
+                                    .fontWeight(.semibold)
+                                    .font(.title)
+                            }
+                            .frame(minWidth: 0, maxWidth: .infinity)
+                            .padding()
+                            .foregroundColor(.white)
+                            .buttonStyle(PlainButtonStyle())
+                            .cornerRadius(40)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 40)
+                                    .stroke(Color.white, lineWidth: 2)
+                            )
+                            
                         }
-                        .frame(minWidth: 0, maxWidth: .infinity)
-                        .padding()
-                        .foregroundColor(.white)
-                        .buttonStyle(PlainButtonStyle())
-                        .cornerRadius(40)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 40)
-                                .stroke(Color.white, lineWidth: 2)
-                        )
+                        
                     }
                 }
                 .frame(width: 300, height: 600)
-                //.navigationBarHidden(true)
+                .navigationBarHidden(true)
                 .navigationTitle("")
             }
         }
         .navigationBarHidden(true)
+        .environmentObject(stateManager)
     }
 }
 
 struct StartView_Previews: PreviewProvider {
     static var previews: some View {
             StartView()
+            .environmentObject(StateManager())
     }
 }

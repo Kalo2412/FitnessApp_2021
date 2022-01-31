@@ -16,5 +16,6 @@ struct TrainingsListView: View {
 struct TrainingsListView_Previews: PreviewProvider {
     static var previews: some View {
         TrainingsListView()
+            .environmentObject(StateManager())
     }
 }
