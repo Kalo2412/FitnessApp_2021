@@ -17,9 +17,6 @@ struct MainView: View {
                     Label("Home", systemImage: "house.fill")
                 }
                 .tag(1)
-                .onAppear(perform: {
-                    print("TEST: \(stateManager.rootViewIsShownWhenLogOutForRegister)")
-                })
             
             TrainingsListView()
                 .tabItem {
@@ -36,6 +33,7 @@ struct MainView: View {
         .navigationBarHidden(true)
         .accentColor(Color("darkGreen"))
     }
+    
 }
 
 struct MainView_Previews: PreviewProvider {

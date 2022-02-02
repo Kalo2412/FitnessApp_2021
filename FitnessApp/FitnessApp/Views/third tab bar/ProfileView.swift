@@ -63,6 +63,7 @@ struct ProfileView: View {
                                     if signOut() {
                                         stateManager.rootViewIsShownWhenLogOut = false
                                         stateManager.rootViewIsShownWhenLogOutForRegister = false
+                                        stateManager.selection = 1
                                     }
                                     else {
                                         showPopUpWindow = true

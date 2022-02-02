@@ -166,13 +166,13 @@ struct RegisterAndLoginView: View {
                             }
                         }
                         .padding()
-                        .navigationBarHidden(true)
-                        .navigationBarTitle("")
                     }
                 }
                 .background(Color("lightGreen")
                                 .ignoresSafeArea())
             }
+            .navigationBarTitle("")
+            .navigationBarHidden(true)
             .blur(radius: showPopUpWindow ? 3 : 0)
         
             PopUpWindow(title: "Error", message: errorMessage, buttonText: "Okay", show: $showPopUpWindow)
@@ -181,7 +181,6 @@ struct RegisterAndLoginView: View {
                 }
                 .ignoresSafeArea()
         }
-        .navigationBarHidden(true)
     }
     
     private func login(response: @escaping (_ isLoggedIn: Bool) -> Void) {

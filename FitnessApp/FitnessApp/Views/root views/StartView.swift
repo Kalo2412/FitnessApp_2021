@@ -23,7 +23,9 @@ struct StartView: View {
                     Text("Welcome")
                         .font(.system(size: 60, weight: .bold, design: .monospaced))
                         .foregroundColor(.white)
+                    
                     Spacer()
+                    
                     NavigationLink(destination: RegisterAndLoginView().navigationBarBackButtonHidden(true),isActive: $stateManager.rootViewIsShownWhenLogOut) {
                         HStack {
                             Image(systemName: "person")
@@ -39,11 +41,13 @@ struct StartView: View {
                         .cornerRadius(40)
                         .shadow(radius: 5.0)
                     }
+                    
                     NavigationLink(destination:RegisterAndLoginView().navigationBarBackButtonHidden(true),isActive: $stateManager.rootViewIsShownWhenLogOutForRegister) {
                         Button(action: {
                             stateManager.isLoginMode = false
                             stateManager.rootViewIsShownWhenLogOutForRegister = true
-                        }){
+                        })
+                        {
                             HStack {
                                 Image(systemName: "rectangle.and.pencil.and.ellipsis")
                                     .font(.title)
@@ -60,16 +64,13 @@ struct StartView: View {
                                 RoundedRectangle(cornerRadius: 40)
                                     .stroke(Color.white, lineWidth: 2)
                             )
-                            
                         }
-                        
                     }
                 }
                 .frame(width: 300, height: 600)
-                .navigationBarHidden(true)
-                .navigationTitle("")
             }
         }
+        .navigationTitle("")
         .navigationBarHidden(true)
         .environmentObject(stateManager)
     }
