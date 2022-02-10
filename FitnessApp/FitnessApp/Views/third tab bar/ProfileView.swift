@@ -220,6 +220,7 @@ struct ProfileView: View {
             
         }
         .navigationBarHidden(user.uid == FirebaseManager.instance.auth.currentUser?.uid)
+        .navigationBarTitle("", displayMode: .inline)
         .fullScreenCover(isPresented: $showImagePicker, onDismiss: nil) {
             ImagePicker(sourceType: .photoLibrary, completionHandler: didSelectImage)
         }
