@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-class UserModel {
-    var uid: String = FirebaseManager.instance.auth.currentUser?.uid ?? ""
-    var email: String = ""
-    var name: String = ""
-    var age: String = ""
-    var profession: String = ""
-    var friends: [FriendModel] = []
-    var profilePicture: UIImage? = nil
+class UserModel: ObservableObject {
+    @Published var uid: String = FirebaseManager.instance.auth.currentUser?.uid ?? ""
+    @Published var email: String = ""
+    @Published var name: String = ""
+    @Published var age: String = ""
+    @Published var profession: String = ""
+    @Published var friends: [FriendModel] = []
+    @Published var profilePicture: UIImage? = nil
     
     init(uid: String) {
         

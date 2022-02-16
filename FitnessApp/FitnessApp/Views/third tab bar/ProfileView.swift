@@ -9,7 +9,8 @@ import SwiftUI
 
 struct ProfileView: View {
     @EnvironmentObject var stateManager: StateManager
-    @State var user: UserModel
+    
+    @ObservedObject var user: UserModel
     
     @State private var showPopUpWindow = false
     @State private var errorMessage = ""
@@ -20,7 +21,7 @@ struct ProfileView: View {
     @State private var image: UIImage = UIImage()
     
     init(userUid: String) {
-        _user = State(initialValue: UserModel(uid: userUid))
+        user = UserModel(uid: userUid)
         
         UITableView.appearance().backgroundColor = .clear
         

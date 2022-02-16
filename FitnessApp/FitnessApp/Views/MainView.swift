@@ -24,7 +24,7 @@ struct MainView: View {
                 }
                 .tag(2)
             
-            ProfileView(userUid: FirebaseManager.instance.auth.currentUser?.uid ?? "asdf!")
+            ProfileView(userUid: FirebaseManager.instance.auth.currentUser?.uid ?? "")
                 .tabItem {
                     Label("Profile", systemImage: "person.fill")
                 }
