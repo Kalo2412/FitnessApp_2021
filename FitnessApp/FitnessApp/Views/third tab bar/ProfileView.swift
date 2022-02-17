@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct ProfileView: View {
     @EnvironmentObject var stateManager: StateManager
@@ -206,6 +207,29 @@ struct ProfileView: View {
                     )
                     .padding()
                     
+                    if user.uid != FirebaseManager.instance.auth.currentUser?.uid {
+                        Button {
+                            removeFriend() { isRemoved in
+                                if isRemoved {
+                                    stateManager.selection = 3
+                                }
+                                else {
+                                    showPopUpWindow = true
+                                    errorMessage = "There was an error. Try again later."
+                                }
+                            }
+                        } label: {
+                            Text("Remove friend")
+                                .padding(.horizontal, 10)
+                                .padding(.vertical, 10)
+                                .foregroundColor(Color("darkRed"))
+                                .cornerRadius(40)
+                                .overlay(RoundedRectangle(cornerRadius: 40)
+                                            .stroke(Color("darkRed"), lineWidth: 2)
+                            )
+                        }
+                    }
+                    
                     Spacer()
                 }
                 .blur(radius: showPopUpWindow ? 3 : 0)
@@ -282,6 +306,78 @@ struct ProfileView: View {
         catch {
             return false
         }
+    }
+    
+    private func removeFriend(response: @escaping (_ isRemoved: Bool) -> Void) {
+        let currentUserUid = FirebaseManager.instance.auth.currentUser?.uid ?? ""
+        
+        if currentUserUid == "" {
+            print("current user uid is nil")
+            response(false)
+            return
+        }
+        
+        let friendsDocument = FirebaseManager.instance.firestore.collection("friends").document(currentUserUid)
+        
+        var friendIndex = -1
+        var friendsCount = 0
+        
+        friendsDocument.getDocument { document, error in
+            print("here")
+            
+            guard error == nil else {
+                print("cannot get document")
+                response(false)
+                return
+            }
+            
+            guard let data = document?.data() else {
+                print("data is nil")
+                response(false)
+                return
+            }
+            
+            friendsCount = data["count"] as? Int ?? 0
+            print("friends count: \(friendsCount)")
+            if friendsCount > 0 {
+                for i in 0 ... friendsCount - 1  {
+                    let friendUid = data["#\(i)"] as? String ?? ""
+                    print("\(friendUid) == \(user.uid) -> \(friendUid == user.uid)")
+                    if friendUid == user.uid {
+                        friendIndex = i
+                        print(friendIndex)
+                        break
+                    }
+                }
+            }
+            
+        }
+        
+        print("\(friendIndex) -> \(friendIndex == -1)")
+        
+        if friendIndex == -1 {
+            print("friend index is -1")
+            response(false)
+            return
+        }
+        
+        friendsDocument.updateData(["#\(friendIndex)": FieldValue.delete()]) { error in
+                if error != nil {
+                    print("error friend")
+                    response(false)
+                    return
+                }
+        }
+        
+        friendsDocument.updateData(["count": friendsCount]) { error in
+                if error != nil {
+                    print("error count")
+                    response(false)
+                    return
+                }
+        }
+        
+        response(true)
     }
 }
 
