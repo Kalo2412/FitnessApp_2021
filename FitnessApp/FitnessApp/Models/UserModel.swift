@@ -67,6 +67,16 @@ class UserModel: ObservableObject {
             }
         }
     }
+    
+    public func hasFriend (friendUid: String) -> Bool {
+        for friend in self.friends {
+            if friend.uid == friendUid {
+                return true
+            }
+        }
+        
+        return false
+    }
 }
 
 class FriendModel: Identifiable {

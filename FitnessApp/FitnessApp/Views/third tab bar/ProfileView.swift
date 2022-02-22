@@ -10,6 +10,7 @@ import Firebase
 
 struct ProfileView: View {
     @EnvironmentObject var stateManager: StateManager
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @ObservedObject var user: UserModel
     @ObservedObject var loggedUser = UserModel(uid: FirebaseManager.instance.auth.currentUser?.uid ?? "")
@@ -208,11 +209,11 @@ struct ProfileView: View {
                     )
                     .padding()
                     
-                    if user.uid != FirebaseManager.instance.auth.currentUser?.uid {
+                    if loggedUser.hasFriend(friendUid: user.uid) {
                         Button {
                             removeFriend() { isRemoved in
                                 if isRemoved {
-                                    stateManager.selection = 3
+                                    presentationMode.wrappedValue.dismiss()
                                 }
                                 else {
                                     showPopUpWindow = true
@@ -358,7 +359,6 @@ struct ProfileView: View {
                         return
                     }
             }
-            lastFriend.index = friendIndex
         }
         
         friendsDocument.updateData(["#\(lastFriend.index)": FieldValue.delete()]) { error in
@@ -368,6 +368,8 @@ struct ProfileView: View {
                     return
                 }
         }
+        
+        lastFriend.index = friendIndex
         
         response(true)
     }
