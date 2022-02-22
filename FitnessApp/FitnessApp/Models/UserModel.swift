@@ -48,7 +48,7 @@ class UserModel: ObservableObject {
                         if friendsCount > 0 {
                             for friendIndex in 0 ... friendsCount - 1  {
                                 let friendUid = data["#\(friendIndex)"] as? String ?? ""
-                                self.friends.append(FriendModel(uid: friendUid))
+                                self.friends.append(FriendModel(uid: friendUid, index: friendIndex))
                             }
                         }
                     }
@@ -70,11 +70,14 @@ class UserModel: ObservableObject {
 }
 
 class FriendModel: Identifiable {
+    var index: Int = -1
     var uid: String = ""
     var name: String = ""
     var profilePicture: UIImage? = nil
     
-    init(uid: String) {
+    init(uid: String, index: Int) {
+        self.index = index
+        
         if uid != "" {
             FirebaseManager.instance.firestore.collection("users").document(uid).getDocument { document, error in
                 guard error == nil else {

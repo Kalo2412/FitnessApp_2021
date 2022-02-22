@@ -12,6 +12,7 @@ struct ProfileView: View {
     @EnvironmentObject var stateManager: StateManager
     
     @ObservedObject var user: UserModel
+    @ObservedObject var loggedUser = UserModel(uid: FirebaseManager.instance.auth.currentUser?.uid ?? "")
     
     @State private var showPopUpWindow = false
     @State private var errorMessage = ""
@@ -309,51 +310,29 @@ struct ProfileView: View {
     }
     
     private func removeFriend(response: @escaping (_ isRemoved: Bool) -> Void) {
-        let currentUserUid = FirebaseManager.instance.auth.currentUser?.uid ?? ""
-        
-        if currentUserUid == "" {
-            print("current user uid is nil")
+        if loggedUser.uid == "" {
+            print("logged user uid is nil")
             response(false)
             return
         }
         
-        let friendsDocument = FirebaseManager.instance.firestore.collection("friends").document(currentUserUid)
-        
-        var friendIndex = -1
-        var friendsCount = 0
-        
-        friendsDocument.getDocument { document, error in
-            print("here")
-            
-            guard error == nil else {
-                print("cannot get document")
-                response(false)
-                return
-            }
-            
-            guard let data = document?.data() else {
-                print("data is nil")
-                response(false)
-                return
-            }
-            
-            friendsCount = data["count"] as? Int ?? 0
-            print("friends count: \(friendsCount)")
-            if friendsCount > 0 {
-                for i in 0 ... friendsCount - 1  {
-                    let friendUid = data["#\(i)"] as? String ?? ""
-                    print("\(friendUid) == \(user.uid) -> \(friendUid == user.uid)")
-                    if friendUid == user.uid {
-                        friendIndex = i
-                        print(friendIndex)
-                        break
-                    }
-                }
-            }
-            
+        if loggedUser.friends.count == 0 {
+            print("logged user has no friends")
+            response(false)
+            return
         }
         
-        print("\(friendIndex) -> \(friendIndex == -1)")
+        var friendIndex = -1
+        var lastFriend = loggedUser.friends[0]
+        
+        for friend in loggedUser.friends {
+            if friend.uid == user.uid {
+                friendIndex = friend.index
+            }
+            if friend.index > lastFriend.index {
+                lastFriend = friend
+            }
+        }
         
         if friendIndex == -1 {
             print("friend index is -1")
@@ -361,17 +340,30 @@ struct ProfileView: View {
             return
         }
         
-        friendsDocument.updateData(["#\(friendIndex)": FieldValue.delete()]) { error in
+        let friendsDocument = FirebaseManager.instance.firestore.collection("friends").document(loggedUser.uid)
+        
+        friendsDocument.updateData(["count": loggedUser.friends.count - 1]) { error in
                 if error != nil {
-                    print("error friend")
+                    print("error count")
                     response(false)
                     return
                 }
         }
         
-        friendsDocument.updateData(["count": friendsCount]) { error in
+        if friendIndex != lastFriend.index {
+            friendsDocument.updateData(["#\(friendIndex)": lastFriend.uid]) { error in
+                    if error != nil {
+                        print("error swap friends")
+                        response(false)
+                        return
+                    }
+            }
+            lastFriend.index = friendIndex
+        }
+        
+        friendsDocument.updateData(["#\(lastFriend.index)": FieldValue.delete()]) { error in
                 if error != nil {
-                    print("error count")
+                    print("error delete last friend")
                     response(false)
                     return
                 }
