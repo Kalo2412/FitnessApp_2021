@@ -35,7 +35,7 @@ struct ProfileView: View {
             ZStack {
                 VStack(spacing: 15) {
                     HStack {
-                        if user.uid == FirebaseManager.instance.auth.currentUser?.uid {
+                        if user.uid == loggedUser.uid {
                             Spacer()
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
@@ -114,7 +114,7 @@ struct ProfileView: View {
                             
                             Spacer()
                             
-                            if user.uid == FirebaseManager.instance.auth.currentUser?.uid {
+                            if user.uid == loggedUser.uid {
                                 Button {
                                     // TODO: edit profile..
                                 } label: {
@@ -156,7 +156,7 @@ struct ProfileView: View {
                             
                             Spacer()
                             
-                            if user.uid == FirebaseManager.instance.auth.currentUser?.uid {
+                            if user.uid == loggedUser.uid {
                                 Button {
                                     // TODO: add frined..
                                 } label: {
@@ -246,7 +246,7 @@ struct ProfileView: View {
             .navigationBarHidden(true)
             
         }
-        .navigationBarHidden(user.uid == FirebaseManager.instance.auth.currentUser?.uid)
+        .navigationBarHidden(user.uid == loggedUser.uid)
         .navigationBarTitle("", displayMode: .inline)
         .fullScreenCover(isPresented: $showImagePicker, onDismiss: nil) {
             ImagePicker(sourceType: .photoLibrary, completionHandler: didSelectImage)
@@ -267,12 +267,7 @@ struct ProfileView: View {
     }
     
     private func updateProfilePicture(image: UIImage, response: @escaping (_ isUpdated: Bool) -> Void) {
-        guard let uid = FirebaseManager.instance.auth.currentUser?.uid else {
-            response(false)
-            return
-        }
-        
-        let ref = FirebaseManager.instance.storage.reference(withPath: uid)
+        let ref = FirebaseManager.instance.storage.reference(withPath: loggedUser.uid)
         
         guard let imageData = image.jpegData(compressionQuality: 0.5) else {
             response(false)
