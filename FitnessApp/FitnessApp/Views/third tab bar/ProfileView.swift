@@ -14,12 +14,12 @@ struct ProfileView: View {
     
     @ObservedObject var user: UserModel
     
-    @State var isfriendRemoved = false
-    
     @State private var showPopUpWindow = false
     @State private var errorMessage = ""
     
     @State private var isActiveForSignOut = false
+    @State var isActiveForAddFriend = false
+    @State var isfriendRemoved = false
     
     @State private var showImagePicker = false
     @State private var image: UIImage = UIImage()
@@ -158,13 +158,15 @@ struct ProfileView: View {
                             Spacer()
                             
                             if user.uid == stateManager.loggedUser.uid {
-                                Button {
-                                    // TODO: add frined..
-                                } label: {
-                                    Image(systemName: "person.badge.plus")
-                                        .font(.system(size: 20))
+                                NavigationLink(destination: AddFriendView(), isActive: $isActiveForAddFriend) {
+                                    Button {
+                                        isActiveForAddFriend = true
+                                    } label: {
+                                        Image(systemName: "person.badge.plus")
+                                            .font(.system(size: 20))
+                                    }
+                                    .accentColor(Color("darkGreen"))
                                 }
-                                .accentColor(Color("darkGreen"))
                             }
                         }
                         .padding(.bottom, 5)
