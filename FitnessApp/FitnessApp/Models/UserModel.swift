@@ -13,7 +13,7 @@ class UserModel: ObservableObject {
     @Published var name: String = ""
     @Published var age: String = ""
     @Published var profession: String = ""
-    @Published var friends: [FriendModel] = []
+    @Published var friends: [UserShortModel] = []
     @Published var profilePicture: UIImage? = nil
     
     init(uid: String) {
@@ -48,7 +48,7 @@ class UserModel: ObservableObject {
                         if friendsCount > 0 {
                             for friendIndex in 0 ... friendsCount - 1  {
                                 let friendUid = data["#\(friendIndex)"] as? String ?? ""
-                                self.friends.append(FriendModel(uid: friendUid))
+                                self.friends.append(UserShortModel(uid: friendUid, index: friendIndex))
                             }
                         }
                     }
@@ -67,37 +67,14 @@ class UserModel: ObservableObject {
             }
         }
     }
-}
-
-class FriendModel: Identifiable {
-    var uid: String = ""
-    var name: String = ""
-    var profilePicture: UIImage? = nil
     
-    init(uid: String) {
-        if uid != "" {
-            FirebaseManager.instance.firestore.collection("users").document(uid).getDocument { document, error in
-                guard error == nil else {
-                    return
-                }
-                
-                let data = document?.data()
-                if let data = data {
-                    self.uid = uid
-                    self.name = data["name"] as? String ?? ""
-                }
-            }
-            
-            let ref = FirebaseManager.instance.storage.reference(withPath: uid)
-            
-            let maxSize: Int64 = 10 * 1024 * 1024 // 10MB
-            ref.getData(maxSize: maxSize) { data, error in
-                if  error != nil {
-                    return
-                }
-                
-                self.profilePicture = data.flatMap(UIImage.init)
+    public func hasFriend (friendUid: String) -> Bool {
+        for friend in self.friends {
+            if friend.uid == friendUid {
+                return true
             }
         }
+        
+        return false
     }
 }

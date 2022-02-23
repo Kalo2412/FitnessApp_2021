@@ -191,6 +191,7 @@ struct RegisterAndLoginView: View {
                 response(false)
             }
             else {
+                stateManager.loggedUser = UserModel(uid: FirebaseManager.instance.auth.currentUser?.uid ?? "")
                 response(true)
             }
         }
@@ -263,6 +264,8 @@ struct RegisterAndLoginView: View {
                 response(false)
                 return
             }
+            
+            stateManager.loggedUser = UserModel(uid: FirebaseManager.instance.auth.currentUser?.uid ?? "")
             
             response(true)
         }

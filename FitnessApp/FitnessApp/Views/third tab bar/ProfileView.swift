@@ -10,6 +10,7 @@ import Firebase
 
 struct ProfileView: View {
     @EnvironmentObject var stateManager: StateManager
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     @ObservedObject var user: UserModel
     
@@ -17,6 +18,8 @@ struct ProfileView: View {
     @State private var errorMessage = ""
     
     @State private var isActiveForSignOut = false
+    @State var isActiveForAddFriend = false
+    @State var isfriendRemoved = false
     
     @State private var showImagePicker = false
     @State private var image: UIImage = UIImage()
@@ -33,7 +36,7 @@ struct ProfileView: View {
             ZStack {
                 VStack(spacing: 15) {
                     HStack {
-                        if user.uid == FirebaseManager.instance.auth.currentUser?.uid {
+                        if user.uid == stateManager.loggedUser.uid {
                             Spacer()
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
@@ -112,7 +115,7 @@ struct ProfileView: View {
                             
                             Spacer()
                             
-                            if user.uid == FirebaseManager.instance.auth.currentUser?.uid {
+                            if user.uid == stateManager.loggedUser.uid {
                                 Button {
                                     // TODO: edit profile..
                                 } label: {
@@ -154,14 +157,16 @@ struct ProfileView: View {
                             
                             Spacer()
                             
-                            if user.uid == FirebaseManager.instance.auth.currentUser?.uid {
-                                Button {
-                                    // TODO: add frined..
-                                } label: {
-                                    Image(systemName: "person.badge.plus")
-                                        .font(.system(size: 20))
+                            if user.uid == stateManager.loggedUser.uid {
+                                NavigationLink(destination: AddFriendView(), isActive: $isActiveForAddFriend) {
+                                    Button {
+                                        isActiveForAddFriend = true
+                                    } label: {
+                                        Image(systemName: "person.badge.plus")
+                                            .font(.system(size: 20))
+                                    }
+                                    .accentColor(Color("darkGreen"))
                                 }
-                                .accentColor(Color("darkGreen"))
                             }
                         }
                         .padding(.bottom, 5)
@@ -207,26 +212,28 @@ struct ProfileView: View {
                     )
                     .padding()
                     
-                    if user.uid != FirebaseManager.instance.auth.currentUser?.uid {
-                        Button {
-                            removeFriend() { isRemoved in
-                                if isRemoved {
-                                    stateManager.selection = 3
+                    if stateManager.loggedUser.hasFriend(friendUid: user.uid) {
+                        NavigationLink(destination: ProfileView(userUid: stateManager.loggedUser.uid).navigationBarHidden(true), isActive: $isfriendRemoved) {
+                            Button {
+                                removeFriend() { isRemoved in
+                                    if isRemoved {
+                                        presentationMode.wrappedValue.dismiss()
+                                    }
+                                    else {
+                                        showPopUpWindow = true
+                                        errorMessage = "There was an error. Try again later."
+                                    }
                                 }
-                                else {
-                                    showPopUpWindow = true
-                                    errorMessage = "There was an error. Try again later."
-                                }
+                            } label: {
+                                Text("Remove friend")
+                                    .padding(.horizontal, 10)
+                                    .padding(.vertical, 10)
+                                    .foregroundColor(Color("darkRed"))
+                                    .cornerRadius(40)
+                                    .overlay(RoundedRectangle(cornerRadius: 40)
+                                                .stroke(Color("darkRed"), lineWidth: 2)
+                                )
                             }
-                        } label: {
-                            Text("Remove friend")
-                                .padding(.horizontal, 10)
-                                .padding(.vertical, 10)
-                                .foregroundColor(Color("darkRed"))
-                                .cornerRadius(40)
-                                .overlay(RoundedRectangle(cornerRadius: 40)
-                                            .stroke(Color("darkRed"), lineWidth: 2)
-                            )
                         }
                     }
                     
@@ -242,9 +249,10 @@ struct ProfileView: View {
                 
             }
             .navigationBarHidden(true)
+            
         }
-        .navigationBarTitle("")
-        .navigationBarHidden(true)
+        .navigationBarHidden(user.uid == stateManager.loggedUser.uid)
+        .navigationBarTitle("", displayMode: .inline)
         .fullScreenCover(isPresented: $showImagePicker, onDismiss: nil) {
             ImagePicker(sourceType: .photoLibrary, completionHandler: didSelectImage)
         }
@@ -264,12 +272,7 @@ struct ProfileView: View {
     }
     
     private func updateProfilePicture(image: UIImage, response: @escaping (_ isUpdated: Bool) -> Void) {
-        guard let uid = FirebaseManager.instance.auth.currentUser?.uid else {
-            response(false)
-            return
-        }
-        
-        let ref = FirebaseManager.instance.storage.reference(withPath: uid)
+        let ref = FirebaseManager.instance.storage.reference(withPath: stateManager.loggedUser.uid)
         
         guard let imageData = image.jpegData(compressionQuality: 0.5) else {
             response(false)
@@ -308,51 +311,29 @@ struct ProfileView: View {
     }
     
     private func removeFriend(response: @escaping (_ isRemoved: Bool) -> Void) {
-        let currentUserUid = FirebaseManager.instance.auth.currentUser?.uid ?? ""
-        
-        if currentUserUid == "" {
-            print("current user uid is nil")
+        if stateManager.loggedUser.uid == "" {
+            print("logged user uid is nil")
             response(false)
             return
         }
         
-        let friendsDocument = FirebaseManager.instance.firestore.collection("friends").document(currentUserUid)
-        
-        var friendIndex = -1
-        var friendsCount = 0
-        
-        friendsDocument.getDocument { document, error in
-            print("here")
-            
-            guard error == nil else {
-                print("cannot get document")
-                response(false)
-                return
-            }
-            
-            guard let data = document?.data() else {
-                print("data is nil")
-                response(false)
-                return
-            }
-            
-            friendsCount = data["count"] as? Int ?? 0
-            print("friends count: \(friendsCount)")
-            if friendsCount > 0 {
-                for i in 0 ... friendsCount - 1  {
-                    let friendUid = data["#\(i)"] as? String ?? ""
-                    print("\(friendUid) == \(user.uid) -> \(friendUid == user.uid)")
-                    if friendUid == user.uid {
-                        friendIndex = i
-                        print(friendIndex)
-                        break
-                    }
-                }
-            }
-            
+        if stateManager.loggedUser.friends.count == 0 {
+            print("logged user has no friends")
+            response(false)
+            return
         }
         
-        print("\(friendIndex) -> \(friendIndex == -1)")
+        var friendIndex = -1
+        var lastFriend = stateManager.loggedUser.friends[0]
+        
+        for friend in stateManager.loggedUser.friends {
+            if friend.uid == user.uid {
+                friendIndex = friend.index
+            }
+            if friend.index > lastFriend.index {
+                lastFriend = friend
+            }
+        }
         
         if friendIndex == -1 {
             print("friend index is -1")
@@ -360,21 +341,37 @@ struct ProfileView: View {
             return
         }
         
-        friendsDocument.updateData(["#\(friendIndex)": FieldValue.delete()]) { error in
-                if error != nil {
-                    print("error friend")
-                    response(false)
-                    return
-                }
-        }
+        let friendsDocument = FirebaseManager.instance.firestore.collection("friends").document(stateManager.loggedUser.uid)
         
-        friendsDocument.updateData(["count": friendsCount]) { error in
+        friendsDocument.updateData(["count": stateManager.loggedUser.friends.count - 1]) { error in
                 if error != nil {
                     print("error count")
                     response(false)
                     return
                 }
         }
+        
+        if friendIndex != lastFriend.index {
+            friendsDocument.updateData(["#\(friendIndex)": lastFriend.uid]) { error in
+                    if error != nil {
+                        print("error swap friends")
+                        response(false)
+                        return
+                    }
+            }
+        }
+        
+        friendsDocument.updateData(["#\(lastFriend.index)": FieldValue.delete()]) { error in
+                if error != nil {
+                    print("error delete last friend")
+                    response(false)
+                    return
+                }
+        }
+        
+        lastFriend.index = friendIndex
+        
+        stateManager.loggedUser.friends.remove(at: stateManager.loggedUser.friends.count - 1)
         
         response(true)
     }

@@ -12,5 +12,6 @@ class StateManager: ObservableObject {
     @Published var rootViewIsShownWhenLogOutForRegister: Bool = false
     @Published var isLoginMode: Bool = true
     @Published var selection: Int = 1
+    @Published var loggedUser: UserModel = UserModel(uid: FirebaseManager.instance.auth.currentUser?.uid ?? "")
     
 }
