@@ -1,5 +1,5 @@
 //
-//  FriendModel.swift
+//  UserShortModel.swift
 //  FitnessApp
 //
 //  Created by Stefania Tsvetkova on 2/22/22.
@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-class FriendModel: Identifiable {
-    var index: Int = -1
-    var uid: String = ""
-    var name: String = ""
-    var profilePicture: UIImage? = nil
+class UserShortModel: Identifiable, ObservableObject {
+    @Published var index: Int = -1
+    @Published var uid: String = ""
+    @Published var name: String = ""
+    @Published var profilePicture: UIImage? = nil
     
     init(uid: String, index: Int) {
         self.index = index
