@@ -51,6 +51,10 @@
 		D84EFA1F279EAEDE004E5EC7 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = D84EFA1E279EAEDE004E5EC7 /* FirebaseStorageCombine-Community */; };
 		D84EFA21279EAEDE004E5EC7 /* FirebaseStorageSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = D84EFA20279EAEDE004E5EC7 /* FirebaseStorageSwift-Beta */; };
 		D866F9DD279EC6FE00C79BB1 /* stateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D866F9DC279EC6FE00C79BB1 /* stateManager.swift */; };
+		D8FEFE3C27BFF31300C7F752 /* TrainingsListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FEFE3B27BFF31300C7F752 /* TrainingsListRow.swift */; };
+		D8FEFE3E27C65E1700C7F752 /* TrainingCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FEFE3D27C65E1700C7F752 /* TrainingCalendar.swift */; };
+		D8FEFE4027C665E500C7F752 /* DateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FEFE3F27C665E500C7F752 /* DateValue.swift */; };
+		D8FEFE4227C6789B00C7F752 /* Training.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FEFE4127C6789B00C7F752 /* Training.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +77,10 @@
 		03FDBE192798546F002B8742 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D8418CD227977D2000CFC20B /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		D866F9DC279EC6FE00C79BB1 /* stateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stateManager.swift; sourceTree = "<group>"; };
+		D8FEFE3B27BFF31300C7F752 /* TrainingsListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingsListRow.swift; sourceTree = "<group>"; };
+		D8FEFE3D27C65E1700C7F752 /* TrainingCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingCalendar.swift; sourceTree = "<group>"; };
+		D8FEFE3F27C665E500C7F752 /* DateValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateValue.swift; sourceTree = "<group>"; };
+		D8FEFE4127C6789B00C7F752 /* Training.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Training.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +167,7 @@
 				03DFBA7827970C79005C7473 /* LoginModel.swift */,
 				03C2511E2799FE8300C0897F /* UserModel.swift */,
 				D866F9DC279EC6FE00C79BB1 /* stateManager.swift */,
+				D8FEFE3F27C665E500C7F752 /* DateValue.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -166,6 +175,7 @@
 		03DFBA7C27971577005C7473 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D8FEFE3A27BFF2F500C7F752 /* View Models */,
 				D866F9DA279EC69D00C79BB1 /* third tab bar */,
 				D866F9D7279EC64E00C79BB1 /* first tab bar */,
 				D866F9D9279EC68000C79BB1 /* second tab bar */,
@@ -216,6 +226,16 @@
 				03DFBA592796BBBA005C7473 /* RegisterAndLoginView.swift */,
 			);
 			path = "root views";
+			sourceTree = "<group>";
+		};
+		D8FEFE3A27BFF2F500C7F752 /* View Models */ = {
+			isa = PBXGroup;
+			children = (
+				D8FEFE3B27BFF31300C7F752 /* TrainingsListRow.swift */,
+				D8FEFE3D27C65E1700C7F752 /* TrainingCalendar.swift */,
+				D8FEFE4127C6789B00C7F752 /* Training.swift */,
+			);
+			path = "View Models";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -326,12 +346,16 @@
 				03CA0F102799AD0200EF5EF7 /* MainView.swift in Sources */,
 				03CA0F132799AF3000EF5EF7 /* ProfileView.swift in Sources */,
 				D866F9DD279EC6FE00C79BB1 /* stateManager.swift in Sources */,
+				D8FEFE3C27BFF31300C7F752 /* TrainingsListRow.swift in Sources */,
+				D8FEFE4227C6789B00C7F752 /* Training.swift in Sources */,
+				D8FEFE3E27C65E1700C7F752 /* TrainingCalendar.swift in Sources */,
 				03DFBA722796FC70005C7473 /* FirebaseManager.swift in Sources */,
 				03DFBA7627970BFA005C7473 /* RegisterModel.swift in Sources */,
 				03DFBA7927970C79005C7473 /* LoginModel.swift in Sources */,
 				03DFBA5A2796BBBA005C7473 /* RegisterAndLoginView.swift in Sources */,
 				03DFBA582796BBBA005C7473 /* FitnessAppApp.swift in Sources */,
 				03635F982798352400FD4F61 /* HomePageView.swift in Sources */,
+				D8FEFE4027C665E500C7F752 /* DateValue.swift in Sources */,
 				03C2511F2799FE8300C0897F /* UserModel.swift in Sources */,
 				D8418CD327977D2000CFC20B /* StartView.swift in Sources */,
 			);

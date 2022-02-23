@@ -8,12 +8,16 @@
 import SwiftUI
 
 struct HomePageView: View {
+    @State var currentDate: Date = Date()
+    
     var body: some View {
-        NavigationView {
-            Text("Home page")
-                .bold()
-                .font(.title)
+        ScrollView(.vertical, showsIndicators: false) {
+            VStack(spacing: 20) {
+                TrainingCalendar(currentDate: $currentDate)
+            }
         }
+        .navigationTitle("")
+        .navigationBarHidden(true)
     }
 }
 
