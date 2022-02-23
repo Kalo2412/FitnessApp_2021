@@ -75,8 +75,59 @@ struct TrainingCalendar: View {
             LazyVGrid(columns: columns, spacing: 15) {
                 ForEach(extractDate()) { value in
                     CardView(value: value)
+                        .background(
+                            Capsule()
+                                .fill(Color("darkGreen"))
+                                .padding(.horizontal,8)
+                                .opacity(isSameDay(date1: value.date, date2:
+                                  currentDate) ? 1 : 0)
+                        )
+                        .onTapGesture {
+                            currentDate = value.date
+                        }
                 }
             }
+            
+            VStack(spacing: 15){
+                
+                VStack(spacing: 10) {
+                    Text("Trainings")
+                        .font(.title.bold())
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    Text("My Trainings")
+                        .font(.subheadline.bold())
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .foregroundColor(Color("grassyGreen"))
+                }
+                .padding(.leading, 5)
+                .padding(.vertical, 10)
+                
+                if let training = trainings.first(where: { training in
+                    return isSameDay(date1: training.trainingDate, date2: currentDate)
+                }) {
+                    ForEach(training.training) { training in
+                        VStack(alignment: .leading, spacing: 10) {
+                            Text(training.time.addingTimeInterval(CGFloat.random(in: 0...5000)), style: .time)
+                            
+                            Text(training.title)
+                                .font(.title2.bold())
+                        }
+                        .padding(.vertical,10)
+                        .padding(.horizontal)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .background(
+                            Color("skyGreen")
+                                .opacity(0.5)
+                                .cornerRadius(10)
+                        )
+                    }
+                } else {
+                    Text("Not trainings for today")
+                }
+                
+                
+            }
+            .padding()
         }
         .onChange(of: currentMonth) { newValue in
             currentDate = getCurrentMonth()
@@ -87,12 +138,37 @@ struct TrainingCalendar: View {
     func CardView(value: DateValue) -> some View {
         VStack {
             if value.day != -1 {
-                Text("\(value.day)")
-                    .font(.title3.bold())
+                if let training = trainings.first(where: { training in
+                    return isSameDay(date1: training.trainingDate, date2: value.date)
+                }) {
+                    Text("\(value.day)")
+                        .font(.title3.bold())
+                        .foregroundColor(isSameDay(date1: training.trainingDate, date2: currentDate) ? .white : .primary)
+                        .frame(maxWidth: .infinity)
+                    
+                    Spacer()
+                    
+                    Circle()
+                        .fill(isSameDay(date1: training.trainingDate, date2: currentDate) ? .white : Color("grassyGreen"))
+                        .frame(width: 8, height: 8)
+                    
+                } else {
+                    Text("\(value.day)")
+                        .font(.title3.bold())
+                        .foregroundColor(isSameDay(date1: value.date, date2: currentDate) ? .white : .primary)
+                        .frame(maxWidth: .infinity)
+                    
+                    Spacer()
+                }
             }
         }
         .padding(.vertical, 8)
         .frame(height: 60, alignment: .top)
+    }
+    func isSameDay(date1: Date, date2: Date) -> Bool {
+        let calendar = Calendar.current
+        
+        return calendar.isDate(date1, inSameDayAs: date2)
     }
     
     func extractDate() -> [String] {

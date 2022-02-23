@@ -15,9 +15,23 @@ struct HomePageView: View {
             VStack(spacing: 20) {
                 TrainingCalendar(currentDate: $currentDate)
             }
+            .padding(.vertical)
         }
         .navigationTitle("")
         .navigationBarHidden(true)
+        .overlay(
+            Button {
+                //todo
+            } label: {
+                Text("+")
+                    .font(.largeTitle)
+                    .foregroundColor(.white)
+                    .padding()
+                    .frame(width: 80)
+                    .background(Color("darkGreen").cornerRadius(50).opacity(0.5))
+                    .padding()
+            }, alignment: .bottomLeading
+        )
     }
 }
 
