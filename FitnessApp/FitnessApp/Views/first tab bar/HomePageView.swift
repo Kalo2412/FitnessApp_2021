@@ -49,6 +49,8 @@ struct HomePageView: View {
 }
 
 struct AddNewTraining: View {
+    @EnvironmentObject var stateManager: StateManager
+    
     @Binding var addFriendWindow: Bool
     @State private var newTraining: TrainingMetaData = TrainingMetaData(training: [], trainingDate: Date())
     @State private var newTrainingTitle: String = ""
@@ -58,7 +60,8 @@ struct AddNewTraining: View {
             VStack {
                 HStack {
                     Text("Add new friend")
-                        .font(.title.bold())
+                        .font(.title)
+                        .fontWeight(.bold)
                     Spacer()
                     Button {
                         trainings.append(newTraining)
@@ -88,6 +91,16 @@ struct AddNewTraining: View {
                                 withAnimation {
                                     let training = Training(title: newTrainingTitle, time: newTraining.trainingDate)
                                     newTraining.training.append(training)
+                                    
+                                    FirebaseManager.instance.firestore.collection("users").document(stateManager.loggedUser.uid).collection("trainings").document(training.id)
+                                        .setData(["title": newTrainingTitle,
+                                                  "time": newTraining.trainingDate])
+                                        { error in
+                                            if error != nil {
+                                                print("Error saving training")
+                                            }
+                                        }
+                                    
                                     newTrainingTitle = ""
                                 }
                             }) {
