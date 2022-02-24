@@ -24,6 +24,7 @@ struct ProfileView: View {
     @State private var showImagePicker = false
     @State private var image: UIImage = UIImage()
     
+    
     init(userUid: String) {
         user = UserModel(uid: userUid)
         
@@ -213,52 +214,48 @@ struct ProfileView: View {
                     .padding()
                     
                     if stateManager.loggedUser.hasFriend(friendUid: user.uid) {
-                        //NavigationLink(destination: ProfileView(userUid: stateManager.loggedUser.uid).navigationBarHidden(true), isActive: $isfriendRemoved) {
-                            Button {
-                                removeFriend() { isRemoved in
-                                    if isRemoved {
-                                        //presentationMode.wrappedValue.dismiss()
-                                    }
-                                    else {
-                                        showPopUpWindow = true
-                                        errorMessage = "There was an error. Try again later."
-                                    }
+                        Button {
+                            removeFriend() { isRemoved in
+                                if isRemoved {
+                                    user.updateView()
                                 }
-                            } label: {
-                                Text("Remove friend")
-                                    .padding(.horizontal, 10)
-                                    .padding(.vertical, 10)
-                                    .foregroundColor(Color("darkRed"))
-                                    .cornerRadius(40)
-                                    .overlay(RoundedRectangle(cornerRadius: 40)
-                                                .stroke(Color("darkRed"), lineWidth: 2)
-                                )
+                                else {
+                                    showPopUpWindow = true
+                                    errorMessage = "There was an error. Try again later."
+                                }
                             }
-                        //}
+                        } label: {
+                            Text("Remove friend")
+                                .padding(.horizontal, 10)
+                                .padding(.vertical, 10)
+                                .foregroundColor(Color("darkRed"))
+                                .cornerRadius(40)
+                                .overlay(RoundedRectangle(cornerRadius: 40)
+                                            .stroke(Color("darkRed"), lineWidth: 2)
+                            )
+                        }
                     }
                     else if stateManager.loggedUser.uid != user.uid {
-                        //NavigationLink(destination: ProfileView(userUid: stateManager.loggedUser.uid).navigationBarHidden(true), isActive: $isfriendRemoved) {
-                            Button {
-                                addFriend() { isAdded in
-                                    if isAdded {
-                                        //presentationMode.wrappedValue.dismiss()
-                                    }
-                                    else {
-                                        showPopUpWindow = true
-                                        errorMessage = "There was an error. Try again later."
-                                    }
+                        Button {
+                            addFriend() { isAdded in
+                                if isAdded {
+                                    user.updateView()
                                 }
-                            } label: {
-                                Text("Add friend")
-                                    .padding(.horizontal, 10)
-                                    .padding(.vertical, 10)
-                                    .foregroundColor(Color("darkGreen"))
-                                    .cornerRadius(40)
-                                    .overlay(RoundedRectangle(cornerRadius: 40)
-                                                .stroke(Color("darkGreen"), lineWidth: 2)
-                                )
+                                else {
+                                    showPopUpWindow = true
+                                    errorMessage = "There was an error. Try again later."
+                                }
                             }
-                        //}
+                        } label: {
+                            Text("Add friend")
+                                .padding(.horizontal, 10)
+                                .padding(.vertical, 10)
+                                .foregroundColor(Color("darkGreen"))
+                                .cornerRadius(40)
+                                .overlay(RoundedRectangle(cornerRadius: 40)
+                                            .stroke(Color("darkGreen"), lineWidth: 2)
+                            )
+                        }
                     }
                     
                     Spacer()
