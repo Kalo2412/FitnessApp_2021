@@ -290,7 +290,7 @@ struct ProfileView: View {
     private func updateProfilePicture(image: UIImage, response: @escaping (_ isUpdated: Bool) -> Void) {
         let ref = FirebaseManager.instance.storage.reference(withPath: stateManager.loggedUser.uid)
         
-        guard let imageData = image.jpegData(compressionQuality: 0.5) else {
+        guard let imageData = image.jpegData(compressionQuality: 0.1) else {
             response(false)
             return
         }
