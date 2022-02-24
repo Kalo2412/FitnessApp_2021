@@ -16,13 +16,6 @@ struct ProfileView: View {
     @State private var showPopUpWindow = false
     @State private var errorMessage = ""
     
-    @State private var isActiveForSignOut = false
-    @State var isActiveForAddFriend = false
-    @State var isfriendRemoved = false
-    
-    @State private var showImagePicker = false
-    @State private var image: UIImage = UIImage()
-    
     
     init(userUid: String) {
         user = UserModel(uid: userUid)
@@ -35,71 +28,22 @@ struct ProfileView: View {
         ZStack {
             VStack(spacing: 15) {
                 HStack {
-                    if user.uid == stateManager.loggedUser.uid {
-                        Spacer()
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    
-                        Button {
-                            showImagePicker = true
-                        } label: {
-                            if let profilePicture = user.profilePicture {
-                                Image(uiImage: profilePicture)
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: 80, height: 80)
-                                    .cornerRadius(40)
-                                    .overlay(Circle()
-                                                .stroke(Color.black, lineWidth: 2)
-                                                .frame(width: 80, height: 80))
-                            }
-                            else {
-                                Image(systemName: "person.crop.circle")
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: 80, height: 80)
-                            }
-                        }
+                    if let profilePicture = user.profilePicture {
+                        Image(uiImage: profilePicture)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 80, height: 80)
+                            .cornerRadius(40)
+                            .overlay(Circle()
+                                        .stroke(Color.black, lineWidth: 2)
+                                        .frame(width: 80, height: 80))
                         
-                        Spacer()
-                        
-                        VStack {
-                            Button {
-                                if signOut() {
-                                    stateManager.isLoginMode = true
-                                    stateManager.rootViewIsShownWhenLogOut = false
-                                    stateManager.rootViewIsShownWhenLogOutForRegister = false
-                                    stateManager.selection = 1
-                                }
-                                else {
-                                    showPopUpWindow = true
-                                    errorMessage = "There was an error. Try signing out later."
-                                }
-                            } label: {
-                                Text("Sign out")
-                                    .foregroundColor(Color("darkGreen"))
-                            }
-                            .frame(maxWidth: .infinity, alignment: .trailing)
-                        }
-                        .frame(maxHeight: 80, alignment: .top)
                     }
                     else {
-                        if let profilePicture = user.profilePicture {
-                            Image(uiImage: profilePicture)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 80, height: 80)
-                                .cornerRadius(40)
-                                .overlay(Circle()
-                                            .stroke(Color.black, lineWidth: 2)
-                                            .frame(width: 80, height: 80))
-                            
-                        }
-                        else {
-                            Image(systemName: "person.crop.circle")
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 80, height: 80)
-                        }
+                        Image(systemName: "person.crop.circle")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 80, height: 80)
                     }
                 }
                 .padding()
@@ -114,16 +58,6 @@ struct ProfileView: View {
                             .font(.system(size: 20, weight: .semibold))
                         
                         Spacer()
-                        
-                        if user.uid == stateManager.loggedUser.uid {
-                            Button {
-                                // TODO: edit profile..
-                            } label: {
-                                Image(systemName: "square.and.pencil")
-                                    .font(.system(size: 20))
-                            }
-                            .accentColor(Color("darkGreen"))
-                        }
                     }
                     .padding(.bottom, 5)
                     
@@ -156,50 +90,72 @@ struct ProfileView: View {
                             .font(.system(size: 20, weight: .semibold))
                         
                         Spacer()
-                        
-                        if user.uid == stateManager.loggedUser.uid {
-                            NavigationLink(destination: AddFriendView(), isActive: $isActiveForAddFriend) {
-                                Button {
-                                    isActiveForAddFriend = true
-                                } label: {
-                                    Image(systemName: "person.badge.plus")
-                                        .font(.system(size: 20))
-                                }
-                                .accentColor(Color("darkGreen"))
-                            }
-                        }
                     }
                     .padding(.bottom, 5)
                     
                     List(user.friends) { friend in
-                        NavigationLink(destination: ProfileView(userUid: friend.uid)) {
-                            HStack {
-                                Button {
-                                } label: {
-                                    HStack {
-                                        if let profilePicture = friend.profilePicture {
-                                            Image(uiImage: profilePicture)
-                                                .resizable()
-                                                .scaledToFill()
-                                                .frame(width: 30, height: 30)
-                                                .cornerRadius(15)
-                                                .overlay(Circle()
-                                                            .stroke(Color.black, lineWidth: 1)
-                                                            .frame(width: 30, height: 30))
+                        if friend.uid == stateManager.loggedUser.uid {
+                            NavigationLink(destination: LoggedUserProfileView()) {
+                                HStack {
+                                    Button {
+                                    } label: {
+                                        HStack {
+                                            if let profilePicture = friend.profilePicture {
+                                                Image(uiImage: profilePicture)
+                                                    .resizable()
+                                                    .scaledToFill()
+                                                    .frame(width: 30, height: 30)
+                                                    .cornerRadius(15)
+                                                    .overlay(Circle()
+                                                                .stroke(Color.black, lineWidth: 1)
+                                                                .frame(width: 30, height: 30))
+                                                
+                                            }
+                                            else {
+                                                Image(systemName: "person.crop.circle")
+                                                    .resizable()
+                                                    .scaledToFill()
+                                                    .frame(width: 30, height: 30)
+                                            }
                                             
+                                            Text(friend.name)
+                                                .font(.system(size: 20))
                                         }
-                                        else {
-                                            Image(systemName: "person.crop.circle")
-                                                .resizable()
-                                                .scaledToFill()
-                                                .frame(width: 30, height: 30)
-                                        }
-                                            
-                                        Text(friend.name)
-                                            .font(.system(size: 20))
                                     }
+                                    Spacer()
                                 }
-                                Spacer()
+                            }
+                        }
+                        else {
+                            NavigationLink(destination: ProfileView(userUid: friend.uid)) {
+                                HStack {
+                                    Button {
+                                    } label: {
+                                        HStack {
+                                            if let profilePicture = friend.profilePicture {
+                                                Image(uiImage: profilePicture)
+                                                    .resizable()
+                                                    .scaledToFill()
+                                                    .frame(width: 30, height: 30)
+                                                    .cornerRadius(15)
+                                                    .overlay(Circle()
+                                                                .stroke(Color.black, lineWidth: 1)
+                                                                .frame(width: 30, height: 30))
+                                                
+                                            }
+                                            else {
+                                                Image(systemName: "person.crop.circle")
+                                                    .resizable()
+                                                    .scaledToFill()
+                                                    .frame(width: 30, height: 30)
+                                            }
+                                            
+                                            Text(friend.name)
+                                                .font(.system(size: 20))
+                                        }
+                                    }
+                                    Spacer()
+                                }
                             }
                         }
                     }
@@ -234,7 +190,7 @@ struct ProfileView: View {
                         )
                     }
                 }
-                else if stateManager.loggedUser.uid != user.uid {
+                else {
                     Button {
                         addFriend() { isAdded in
                             if isAdded {
@@ -268,63 +224,7 @@ struct ProfileView: View {
                 .ignoresSafeArea()
             
         }
-        .navigationBarHidden(user.uid == stateManager.loggedUser.uid)
         .navigationBarTitle("", displayMode: .inline)
-        .fullScreenCover(isPresented: $showImagePicker, onDismiss: nil) {
-            ImagePicker(sourceType: .photoLibrary, completionHandler: didSelectImage)
-        }
-    }
-    
-    func didSelectImage(_ image: UIImage?) {
-        showImagePicker = false
-        
-        if let image = image {
-            updateProfilePicture(image: image) { isUpdated in
-                if !isUpdated {
-                    showPopUpWindow = true
-                    errorMessage = "There was an error. Profile picture cannot be saved."
-                }
-            }
-        }
-    }
-    
-    private func updateProfilePicture(image: UIImage, response: @escaping (_ isUpdated: Bool) -> Void) {
-        let ref = FirebaseManager.instance.storage.reference(withPath: stateManager.loggedUser.uid)
-        
-        guard let imageData = image.jpegData(compressionQuality: 0.1) else {
-            response(false)
-            return
-        }
-        
-        ref.putData(imageData, metadata: nil) { metadata, error in
-            if error != nil {
-                response(false)
-                return
-            }
-            
-            ref.downloadURL { url, error in
-                if error != nil {
-                    response(false)
-                    return
-                }
-                else {
-                    
-                }
-            }
-        }
-        
-        user.profilePicture = image
-        response(true)
-    }
-    
-    private func signOut() -> Bool {
-        do {
-            try FirebaseManager.instance.auth.signOut()
-            return true
-        }
-        catch {
-            return false
-        }
     }
     
     private func removeFriend(response: @escaping (_ isRemoved: Bool) -> Void) {
