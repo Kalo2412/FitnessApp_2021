@@ -13,52 +13,49 @@ struct AddFriendView: View {
     @ObservedObject var usersToAdd: UsersToAddModel = UsersToAddModel()
     
     var body: some View {
-        NavigationView {
-            ZStack {
-                VStack {
-                    Text("Add friend")
-                        .font(.system(size: 20, weight: .bold, design: .monospaced))
-                        .foregroundColor(Color("darkGreen"))
-                        .padding()
-                    
-                    List(usersToAdd.users.filter({ isPossibleFriend(friendUid: $0.uid) })) { user in
-                        NavigationLink(destination: ProfileView(userUid: user.uid)) {
-                            HStack {
-                                Button {
-                                } label: {
-                                    HStack {
-                                        if let profilePicture = user.profilePicture {
-                                            Image(uiImage: profilePicture)
-                                                .resizable()
-                                                .scaledToFill()
-                                                .frame(width: 30, height: 30)
-                                                .cornerRadius(15)
-                                                .overlay(Circle()
-                                                            .stroke(Color.black, lineWidth: 1)
-                                                            .frame(width: 30, height: 30))
-                                            
-                                        }
-                                        else {
-                                            Image(systemName: "person.crop.circle")
-                                                .resizable()
-                                                .scaledToFill()
-                                                .frame(width: 30, height: 30)
-                                        }
-                                            
-                                        Text(user.name)
-                                            .font(.system(size: 20))
+        ZStack {
+            VStack {
+                Text("Add friend")
+                    .font(.system(size: 20, weight: .bold, design: .monospaced))
+                    .foregroundColor(Color("darkGreen"))
+                    .padding()
+                
+                List(usersToAdd.users.filter({ isPossibleFriend(friendUid: $0.uid) })) { user in
+                    NavigationLink(destination: ProfileView(userUid: user.uid)) {
+                        HStack {
+                            Button {
+                            } label: {
+                                HStack {
+                                    if let profilePicture = user.profilePicture {
+                                        Image(uiImage: profilePicture)
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: 30, height: 30)
+                                            .cornerRadius(15)
+                                            .overlay(Circle()
+                                                        .stroke(Color.black, lineWidth: 1)
+                                                        .frame(width: 30, height: 30))
+                                        
                                     }
+                                    else {
+                                        Image(systemName: "person.crop.circle")
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: 30, height: 30)
+                                    }
+                                        
+                                    Text(user.name)
+                                        .font(.system(size: 20))
                                 }
-                                Spacer()
                             }
+                            Spacer()
                         }
                     }
-                    .listStyle(InsetListStyle())
-                    
-                    Spacer()
                 }
+                .listStyle(InsetListStyle())
+                
+                Spacer()
             }
-            .navigationBarHidden(true)
         }
         .navigationBarTitle("", displayMode: .inline)
     }
