@@ -65,6 +65,7 @@ struct ProfileView: View {
                         VStack {
                             Button {
                                 if signOut() {
+                                    stateManager.isLoginMode = true
                                     stateManager.rootViewIsShownWhenLogOut = false
                                     stateManager.rootViewIsShownWhenLogOutForRegister = false
                                     stateManager.selection = 1
