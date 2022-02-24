@@ -16,7 +16,7 @@ struct AddFriendView: View {
         NavigationView {
             ZStack {
                 VStack {
-                    List(usersToAdd.users) { user in
+                    List(usersToAdd.users.filter({ isPossibleFriend(friendUid: $0.uid) })) { user in
                         NavigationLink(destination: ProfileView(userUid: user.uid)) {
                             HStack {
                                 Button {
@@ -56,6 +56,10 @@ struct AddFriendView: View {
             .navigationBarHidden(true)
         }
         .navigationBarTitle("Add friend", displayMode: .inline)
+    }
+    
+    private func isPossibleFriend(friendUid: String) -> Bool {
+        return friendUid != stateManager.loggedUser.uid && !stateManager.loggedUser.hasFriend(friendUid: friendUid)
     }
 }
 
