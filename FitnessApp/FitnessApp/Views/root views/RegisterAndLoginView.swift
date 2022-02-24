@@ -115,7 +115,7 @@ struct RegisterAndLoginView: View {
                                         .modifier(PlaceholderStyle(showPlaceHolder: registerModel.age.isEmpty, placeholder: "Age"))
                                     
                                     TextField("", text: $registerModel.profession)
-                                        .modifier(PlaceholderStyle(showPlaceHolder: registerModel.profession.isEmpty, placeholder: "Proffecion"))
+                                        .modifier(PlaceholderStyle(showPlaceHolder: registerModel.profession.isEmpty, placeholder: "Profecion"))
                                     
                                 }
                                 .frame(width: 250)
@@ -212,7 +212,7 @@ struct RegisterAndLoginView: View {
         
         if registerModel.profession == "" {
             showPopUpWindow = true
-            errorMessage = "Invalid proffession"
+            errorMessage = "Invalid profession"
             response(false)
             return
         }
@@ -237,7 +237,7 @@ struct RegisterAndLoginView: View {
                 .setData(["email": registerModel.email,
                           "name": registerModel.name,
                           "age": ageAsInt,
-                          "proffession": registerModel.profession])
+                          "profession": registerModel.profession])
                 { error in
                     if error != nil {
                         isThereError = true

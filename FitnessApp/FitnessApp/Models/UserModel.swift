@@ -34,7 +34,7 @@ class UserModel: ObservableObject {
                     self.email = data["email"] as? String ?? ""
                     self.name = data["name"] as? String ?? ""
                     self.age = String(data["age"] as? Int ?? 0)
-                    self.profession = data["profession"] as? String ?? ""
+                    self.profession = data["profession"] as? String ?? "not a string :/"
                 }
                 
                 let friendsDocument = FirebaseManager.instance.firestore.collection("friends").document(uid)
