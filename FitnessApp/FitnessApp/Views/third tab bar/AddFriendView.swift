@@ -16,6 +16,11 @@ struct AddFriendView: View {
         NavigationView {
             ZStack {
                 VStack {
+                    Text("Add friend")
+                        .font(.system(size: 20, weight: .bold, design: .monospaced))
+                        .foregroundColor(Color("darkGreen"))
+                        .padding()
+                    
                     List(usersToAdd.users.filter({ isPossibleFriend(friendUid: $0.uid) })) { user in
                         NavigationLink(destination: ProfileView(userUid: user.uid)) {
                             HStack {
@@ -55,7 +60,7 @@ struct AddFriendView: View {
             }
             .navigationBarHidden(true)
         }
-        .navigationBarTitle("Add friend", displayMode: .inline)
+        .navigationBarTitle("", displayMode: .inline)
     }
     
     private func isPossibleFriend(friendUid: String) -> Bool {
