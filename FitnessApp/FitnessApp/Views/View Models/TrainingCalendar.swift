@@ -26,7 +26,8 @@ struct TrainingCalendar: View {
                             .fontWeight(.semibold)
                             .padding(.top, 10)
                         Text(extractDate()[1])
-                            .font(.title.bold())
+                            .font(.title)
+                            .fontWeight(.bold)
                             .padding(.bottom, 10)
                     }
                     Spacer(minLength: 0)
@@ -92,10 +93,12 @@ struct TrainingCalendar: View {
                 
                 VStack(spacing: 10) {
                     Text("Trainings")
-                        .font(.title.bold())
+                        .font(.title)
+                        .fontWeight(.bold)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     Text("My Trainings")
-                        .font(.subheadline.bold())
+                        .font(.subheadline)
+                        .fontWeight(.bold)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .foregroundColor(Color("grassyGreen"))
                 }
@@ -107,10 +110,11 @@ struct TrainingCalendar: View {
                 }) {
                     ForEach(training.training) { training in
                         VStack(alignment: .leading, spacing: 10) {
-                            Text(training.time.addingTimeInterval(CGFloat.random(in: 0...5000)), style: .time)
+                            Text(training.time.addingTimeInterval(Double.random(in: 0...5000)), style: .time)
                             
                             Text(training.title)
-                                .font(.title2.bold())
+                                .font(.title2)
+                                .fontWeight(.bold)
                         }
                         .padding(.vertical,10)
                         .padding(.horizontal)
@@ -142,7 +146,8 @@ struct TrainingCalendar: View {
                     return isSameDay(date1: training.trainingDate, date2: value.date)
                 }) {
                     Text("\(value.day)")
-                        .font(.title3.bold())
+                        .font(.title3)
+                        .fontWeight(.bold)
                         .foregroundColor(isSameDay(date1: training.trainingDate, date2: currentDate) ? .white : .primary)
                         .frame(maxWidth: .infinity)
                     
@@ -154,7 +159,8 @@ struct TrainingCalendar: View {
                     
                 } else {
                     Text("\(value.day)")
-                        .font(.title3.bold())
+                        .font(.title3)
+                        .fontWeight(.bold)
                         .foregroundColor(isSameDay(date1: value.date, date2: currentDate) ? .white : .primary)
                         .frame(maxWidth: .infinity)
                     

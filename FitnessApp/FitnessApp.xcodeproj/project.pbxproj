@@ -17,6 +17,7 @@
 		03CA0F102799AD0200EF5EF7 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CA0F0F2799AD0200EF5EF7 /* MainView.swift */; };
 		03CA0F132799AF3000EF5EF7 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CA0F122799AF3000EF5EF7 /* ProfileView.swift */; };
 		03CA0F162799B17800EF5EF7 /* TrainingsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CA0F152799B17700EF5EF7 /* TrainingsListView.swift */; };
+		03CA32AC27C7F963006FA5C4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 03CA32AB27C7F963006FA5C4 /* GoogleService-Info.plist */; };
 		03DFBA582796BBBA005C7473 /* FitnessAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DFBA572796BBBA005C7473 /* FitnessAppApp.swift */; };
 		03DFBA5A2796BBBA005C7473 /* RegisterAndLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DFBA592796BBBA005C7473 /* RegisterAndLoginView.swift */; };
 		03DFBA5C2796BBC2005C7473 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03DFBA5B2796BBC2005C7473 /* Assets.xcassets */; };
@@ -24,7 +25,6 @@
 		03DFBA722796FC70005C7473 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DFBA712796FC70005C7473 /* FirebaseManager.swift */; };
 		03DFBA7627970BFA005C7473 /* RegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DFBA7527970BF9005C7473 /* RegisterModel.swift */; };
 		03DFBA7927970C79005C7473 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DFBA7827970C79005C7473 /* LoginModel.swift */; };
-		03FDBE1A2798546F002B8742 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 03FDBE192798546F002B8742 /* GoogleService-Info.plist */; };
 		D8418CD327977D2000CFC20B /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8418CD227977D2000CFC20B /* StartView.swift */; };
 		D84EF9ED279EAEDE004E5EC7 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D84EF9EC279EAEDE004E5EC7 /* FirebaseAnalytics */; };
 		D84EF9EF279EAEDE004E5EC7 /* FirebaseAnalyticsSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = D84EF9EE279EAEDE004E5EC7 /* FirebaseAnalyticsSwift-Beta */; };
@@ -71,6 +71,7 @@
 		03CA0F0F2799AD0200EF5EF7 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		03CA0F122799AF3000EF5EF7 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		03CA0F152799B17700EF5EF7 /* TrainingsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingsListView.swift; sourceTree = "<group>"; };
+		03CA32AB27C7F963006FA5C4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		03DFBA542796BBB9005C7473 /* FitnessApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FitnessApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03DFBA572796BBBA005C7473 /* FitnessAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessAppApp.swift; sourceTree = "<group>"; };
 		03DFBA592796BBBA005C7473 /* RegisterAndLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterAndLoginView.swift; sourceTree = "<group>"; };
@@ -80,7 +81,6 @@
 		03DFBA712796FC70005C7473 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		03DFBA7527970BF9005C7473 /* RegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterModel.swift; sourceTree = "<group>"; };
 		03DFBA7827970C79005C7473 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
-		03FDBE192798546F002B8742 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D8418CD227977D2000CFC20B /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		D866F9DC279EC6FE00C79BB1 /* stateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stateManager.swift; sourceTree = "<group>"; };
 		D8FEFE3B27BFF31300C7F752 /* TrainingsListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingsListRow.swift; sourceTree = "<group>"; };
@@ -151,8 +151,8 @@
 				03DFBA7C27971577005C7473 /* Views */,
 				03DFBA7B2797156B005C7473 /* Models */,
 				03DFBA5B2796BBC2005C7473 /* Assets.xcassets */,
+				03CA32AB27C7F963006FA5C4 /* GoogleService-Info.plist */,
 				03DFBA602796BBC2005C7473 /* Info.plist */,
-				03FDBE192798546F002B8742 /* GoogleService-Info.plist */,
 				03DFBA5D2796BBC2005C7473 /* Preview Content */,
 			);
 			path = FitnessApp;
@@ -338,7 +338,7 @@
 			files = (
 				03DFBA5F2796BBC2005C7473 /* Preview Assets.xcassets in Resources */,
 				03DFBA5C2796BBC2005C7473 /* Assets.xcassets in Resources */,
-				03FDBE1A2798546F002B8742 /* GoogleService-Info.plist in Resources */,
+				03CA32AC27C7F963006FA5C4 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

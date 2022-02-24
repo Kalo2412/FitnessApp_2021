@@ -19,9 +19,6 @@ struct RegisterAndLoginView: View {
     @State private var isActiveForLogin = false
     @State private var isActiveForRegister = false
     
-
-    
-
     var body: some View {
         ZStack {
             NavigationView {

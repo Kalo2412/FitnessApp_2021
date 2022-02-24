@@ -16,6 +16,8 @@ class UserModel: ObservableObject {
     @Published var friends: [UserShortModel] = []
     @Published var profilePicture: UIImage? = nil
     
+    @Published var updater = false
+    
     init(uid: String) {
         
         if uid != "" {
@@ -76,5 +78,10 @@ class UserModel: ObservableObject {
         }
         
         return false
+    }
+    
+    public func updateView() {
+        updater.toggle()
+        print("view should update")
     }
 }

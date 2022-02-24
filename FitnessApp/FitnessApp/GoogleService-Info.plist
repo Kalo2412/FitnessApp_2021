@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>830561517251-71r211rfonesv50eo6e8bmaud2phq0pn.apps.googleusercontent.com</string>
+	<string>429859869873-cks2i6fgmtlohrsosair6u436tftql7j.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.830561517251-71r211rfonesv50eo6e8bmaud2phq0pn</string>
+	<string>com.googleusercontent.apps.429859869873-cks2i6fgmtlohrsosair6u436tftql7j</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAe11klp_aMOdTZymzl4h5TQIk8mo1ItrI</string>
+	<string>AIzaSyCSTeq93QXIocK-84fiKe2EOVOr0w1R6Dw</string>
 	<key>GCM_SENDER_ID</key>
-	<string>830561517251</string>
+	<string>429859869873</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>bg.uni-sofia.fmi.FitnessApp</string>
 	<key>PROJECT_ID</key>
-	<string>fitnessapp-14038</string>
+	<string>fitnessappnew-75e41</string>
 	<key>STORAGE_BUCKET</key>
-	<string>fitnessapp-14038.appspot.com</string>
+	<string>fitnessappnew-75e41.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:830561517251:ios:3c442a51af52f3a2a96c76</string>
+	<string>1:429859869873:ios:9f59f37d356bbf45a7fe90</string>
 </dict>
 </plist>
