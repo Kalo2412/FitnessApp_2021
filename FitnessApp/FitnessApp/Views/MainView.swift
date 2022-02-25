@@ -33,6 +33,7 @@ struct MainView: View {
             }
             .accentColor(Color("darkGreen"))
         }
+        .accentColor(Color("darkGreen"))
         .navigationBarHidden(true)
     }
     
