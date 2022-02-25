@@ -20,16 +20,6 @@ struct HomePageView: View {
                     TrainingCalendar(currentDate: $currentDate, allTrainings: $allTrainings.trainings)
                 }
                 .padding(.vertical)
-                ZStack {
-                    if addFriendWindowToShow {
-                        AddNewTraining(addFriendWindow: $addFriendWindowToShow, allTrainings: $allTrainings.trainings)
-                            .padding(.top, 120)
-                            .padding(.horizontal, 50)
-                            .transition(.move(edge: .bottom))
-                            .animation(.spring())
-                    }
-                }
-                .zIndex(2.0)
             }
         }
         .navigationTitle("")
@@ -46,6 +36,23 @@ struct HomePageView: View {
                     .background(Color("darkGreen").cornerRadius(50).opacity(0.5))
                     .padding()
             }, alignment: .bottomLeading
+        )
+        .blur(radius: addFriendWindowToShow ? 3 : 0)
+        .overlay(
+            ZStack {
+                if addFriendWindowToShow {
+                    AddNewTraining(addFriendWindow: $addFriendWindowToShow, allTrainings: $allTrainings.trainings)
+                        .overlay(
+                        RoundedRectangle(cornerRadius: 30)
+                            .stroke(Color("darkGreen"), lineWidth: 2)
+                        )
+                        .padding(.top, 50)
+                        .padding(.bottom, 20)
+                        .padding(.horizontal, 50)
+                        .transition(.move(edge: .bottom))
+                        .animation(.spring())
+                }
+            }
         )
     }
 }
