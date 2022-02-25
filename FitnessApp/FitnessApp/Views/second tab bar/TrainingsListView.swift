@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct TrainingsListView: View {
+    @ObservedObject var allTrainings = AllTrainingsModel()
+    
     var body: some View {
         List {
-            Section(header: Text("My Trainings").font(.largeTitle), footer: Text("No more trainings").font(.title3).fontWeight(.ultraLight)) {
-                ForEach(trainings) { training in
-                    ForEach(training.training) { currentTraining in
-                        TrainingsListRow(testTraining: currentTraining)
-                            .listRowInsets(EdgeInsets(top: 10, leading: 10, bottom: 0, trailing: 10))
-                    }
+            Section(header: Text("My Trainings").font(.title).foregroundColor(Color("darkGreen")),
+                    footer: Text("No more trainings").font(.title3).fontWeight(.ultraLight)) {
+                ForEach(allTrainings.trainings) {  currentTraining in
+                    TrainingsListRow(training: currentTraining)
+                        .listRowInsets(EdgeInsets(top: 10, leading: 10, bottom: 0, trailing: 10))
                 }
             }
         }

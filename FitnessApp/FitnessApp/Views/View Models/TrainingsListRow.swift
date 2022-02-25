@@ -8,19 +8,20 @@
 import SwiftUI
 
 struct TrainingsListRow: View {
-    let testTraining: Training
+    let training: TrainingModel
+    
     var body: some View {
         ZStack {
             Color("skyGreen")
             HStack {
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(testTraining.title)
+                    Text(training.title)
                         .font(.headline)
-                    Text(testTraining.time.addingTimeInterval(Double.random(in: 0...5000)), style: .time)
+                    Text(training.time.addingTimeInterval(Double.random(in: 0...5000)), style: .time)
                     Label(extractDate(),systemImage: "calendar")
                 }
                 Spacer()
-                PopUpDescription(description: testTraining.description)
+                PopUpDescription(description: training.description)
             }
             .padding()
         }
@@ -30,7 +31,7 @@ struct TrainingsListRow: View {
         let formatter = DateFormatter()
         formatter.dateFormat = "d MMMM YYYY"
         
-        let date = formatter.string(from: testTraining.time)
+        let date = formatter.string(from: training.time)
         
         return date
     }
@@ -54,9 +55,9 @@ struct PopUpDescription: View {
 }
 
 struct TrainingsListRow_Previews: PreviewProvider {
-    static var testTraining = trainings[0].training[0]
+    static var testTraining = TrainingModel(id: "id", title: "Test training", description: "Some description here..", time: Date())
     static var previews: some View {
-        TrainingsListRow(testTraining: testTraining)
+        TrainingsListRow(training: testTraining)
         //PopUpDescription()
             .previewLayout(.fixed(width: 400, height: 80))
     }

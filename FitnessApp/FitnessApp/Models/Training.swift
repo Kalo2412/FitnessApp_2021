@@ -20,7 +20,8 @@ struct TrainingMetaData: Identifiable {
     var trainingDate: Date
 }
 
-func getSampleDate(offset: Int) -> Date {
+// Mock trainings
+/*func getSampleDate(offset: Int) -> Date {
     let calendar = Calendar.current
     
     let date = calendar.date(byAdding: .day, value: offset, to: Date())
@@ -45,4 +46,4 @@ var trainings: [TrainingMetaData] = [
     TrainingMetaData(training: [
                         Training(title: "Yoga at home", description: ""),],
      trainingDate: getSampleDate(offset: -2))
-]
+]*/
