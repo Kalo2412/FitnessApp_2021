@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		035F3BBF279DC71600C58537 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035F3BBE279DC71600C58537 /* ImagePicker.swift */; };
-		03635F982798352400FD4F61 /* HomePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03635F972798352400FD4F61 /* HomePageView.swift */; };
+		03635F982798352400FD4F61 /* HfomePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03635F972798352400FD4F61 /* HomePageView.swift */; };
 		0397251527C5A48100493689 /* UserShortModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397251427C5A48100493689 /* UserShortModel.swift */; };
 		0397251A27C6433B00493689 /* AddFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397251927C6433B00493689 /* AddFriendView.swift */; };
 		0397251D27C6448200493689 /* UsersToAddModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397251C27C6448200493689 /* UsersToAddModel.swift */; };
@@ -25,6 +25,7 @@
 		03DFBA722796FC70005C7473 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DFBA712796FC70005C7473 /* FirebaseManager.swift */; };
 		03DFBA7627970BFA005C7473 /* RegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DFBA7527970BF9005C7473 /* RegisterModel.swift */; };
 		03DFBA7927970C79005C7473 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DFBA7827970C79005C7473 /* LoginModel.swift */; };
+		03F9FD6A27C8509C004E33F1 /* LoggedUserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F9FD6927C8509C004E33F1 /* LoggedUserProfileView.swift */; };
 		D8418CD327977D2000CFC20B /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8418CD227977D2000CFC20B /* StartView.swift */; };
 		D84EF9ED279EAEDE004E5EC7 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D84EF9EC279EAEDE004E5EC7 /* FirebaseAnalytics */; };
 		D84EF9EF279EAEDE004E5EC7 /* FirebaseAnalyticsSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = D84EF9EE279EAEDE004E5EC7 /* FirebaseAnalyticsSwift-Beta */; };
@@ -81,6 +82,7 @@
 		03DFBA712796FC70005C7473 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		03DFBA7527970BF9005C7473 /* RegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterModel.swift; sourceTree = "<group>"; };
 		03DFBA7827970C79005C7473 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
+		03F9FD6927C8509C004E33F1 /* LoggedUserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedUserProfileView.swift; sourceTree = "<group>"; };
 		D8418CD227977D2000CFC20B /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		D866F9DC279EC6FE00C79BB1 /* stateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stateManager.swift; sourceTree = "<group>"; };
 		D8FEFE3B27BFF31300C7F752 /* TrainingsListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingsListRow.swift; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 			children = (
 				03CA0F122799AF3000EF5EF7 /* ProfileView.swift */,
 				0397251927C6433B00493689 /* AddFriendView.swift */,
+				03F9FD6927C8509C004E33F1 /* LoggedUserProfileView.swift */,
 			);
 			path = "third tab bar";
 			sourceTree = "<group>";
@@ -370,6 +373,7 @@
 				03635F982798352400FD4F61 /* HomePageView.swift in Sources */,
 				03C2511F2799FE8300C0897F /* UserModel.swift in Sources */,
 				D8418CD327977D2000CFC20B /* StartView.swift in Sources */,
+				03F9FD6A27C8509C004E33F1 /* LoggedUserProfileView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -560,7 +564,7 @@
 /* Begin XCRemoteSwiftPackageReference section */
 		D84EF9EB279EAEDE004E5EC7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+            repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 8.0.0;

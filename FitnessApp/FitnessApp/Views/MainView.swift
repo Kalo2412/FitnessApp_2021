@@ -25,13 +25,12 @@ struct MainView: View {
                     }
                     .tag(2)
                 
-                ProfileView(userUid: FirebaseManager.instance.auth.currentUser?.uid ?? "")
+                LoggedUserProfileView()
                     .tabItem {
                         Label("Profile", systemImage: "person.fill")
                     }
                     .tag(3)
             }
-            .navigationBarHidden(true)
             .accentColor(Color("darkGreen"))
         }
         .navigationBarHidden(true)
