@@ -20,7 +20,7 @@ struct TrainingsListRow: View {
                     Label(extractDate(),systemImage: "calendar")
                 }
                 Spacer()
-                PopUpDescription()
+                PopUpDescription(description: testTraining.description)
             }
             .padding()
         }
@@ -37,11 +37,15 @@ struct TrainingsListRow: View {
 }
 
 struct PopUpDescription: View {
+    let description: String
+    
+    init(description: String) {
+        self.description = description
+    }
+    
     var body: some View {
         Menu {
-            Button("Cancel") {
-            }
-            Text("Description:\nednjednewnoewenoned\ndjkskd")
+            Text("Description:\n\(description)")
         } label: {
             Image(systemName: "questionmark.circle")
                 .frame(width: 50, height: 50)
