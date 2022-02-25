@@ -170,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				03DFBA7527970BF9005C7473 /* RegisterModel.swift */,
+				D8FEFE8427C67C5000C7F752 /* Training.swift */,
 				03DFBA7827970C79005C7473 /* LoginModel.swift */,
 				03C2511E2799FE8300C0897F /* UserModel.swift */,
 				D8FEFE8227C67A3E00C7F752 /* DateValue.swift */,
@@ -242,7 +243,6 @@
 			children = (
 				D8FEFE3B27BFF31300C7F752 /* TrainingsListRow.swift */,
 				D8FEFE3D27C65E1700C7F752 /* TrainingCalendar.swift */,
-				D8FEFE8427C67C5000C7F752 /* Training.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
