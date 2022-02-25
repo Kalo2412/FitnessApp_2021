@@ -15,6 +15,9 @@ struct TrainingsListRow: View {
             Color("skyGreen")
             HStack {
                 VStack(alignment: .leading, spacing: 2) {
+                    if training.userName != "" {
+                        Text("\(training.userName)'s training")
+                    }
                     Text(training.title)
                         .font(.headline)
                     Text(training.time.addingTimeInterval(Double.random(in: 0...5000)), style: .time)
@@ -55,7 +58,7 @@ struct PopUpDescription: View {
 }
 
 struct TrainingsListRow_Previews: PreviewProvider {
-    static var testTraining = TrainingModel(id: "id", title: "Test training", description: "Some description here..", time: Date())
+    static var testTraining = TrainingModel(id: "id", title: "Test training", description: "Some description here..", time: Date(), userName: "Pesho")
     static var previews: some View {
         TrainingsListRow(training: testTraining)
         //PopUpDescription()

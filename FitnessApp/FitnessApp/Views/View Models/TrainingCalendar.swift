@@ -111,7 +111,11 @@ struct TrainingCalendar: View {
                 } {
                     ForEach(trainings) { training in
                         VStack(alignment: .leading, spacing: 10) {
-                            Text(training.time.addingTimeInterval(Double.random(in: 0...5000)), style: .time)
+                            if training.userName != "" {
+                                Text("\(training.userName)'s training")
+                            }
+                            
+                            Text(training.time, style: .time)
                             
                             Text(training.title)
                                 .font(.title2)

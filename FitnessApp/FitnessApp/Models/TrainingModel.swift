@@ -12,11 +12,13 @@ class TrainingModel: Identifiable, ObservableObject {
     @Published var title: String
     @Published var description: String
     @Published var time: Date
+    @Published var userName: String
     
-    init(id: String, title: String, description: String, time: Date) {
+    init(id: String, title: String, description: String, time: Date, userName: String) {
         self.id = id
         self.title = title
         self.description = description
         self.time = time
+        self.userName = userName
     }
 }

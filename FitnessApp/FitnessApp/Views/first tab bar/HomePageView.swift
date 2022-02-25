@@ -61,7 +61,7 @@ struct AddNewTraining: View {
     @EnvironmentObject var stateManager: StateManager
     
     @Binding var addFriendWindow: Bool
-    @State private var newTraining: TrainingModel = TrainingModel(id: "", title: "", description: "", time: Date())
+    @State private var newTraining: TrainingModel = TrainingModel(id: "", title: "", description: "", time: Date(), userName: "")
     @State private var newTrainingTitle: String = ""
     @State private var newTrainingDescription: String = ""
     @State private var newTrainingDate: Date = Date()
@@ -99,7 +99,7 @@ struct AddNewTraining: View {
                             TextField("New Training", text: $newTrainingTitle)
                             Button(action: {
                                 withAnimation {
-                                    let training = TrainingModel(id: UUID().uuidString, title: newTrainingTitle, description: newTrainingDescription, time: newTrainingDate)
+                                    let training = TrainingModel(id: UUID().uuidString, title: newTrainingTitle, description: newTrainingDescription, time: newTrainingDate, userName: stateManager.loggedUser.name)
                                     allTrainings.append(training)
                                     
                                     FirebaseManager.instance.firestore.collection("users").document(stateManager.loggedUser.uid).collection("trainings").document(training.id)
