@@ -5,6 +5,7 @@
 //  Created by Stefania Tsvetkova on 2/25/22.
 //
 
+import FirebaseFirestore
 import SwiftUI
 
 class AllTrainingsModel: ObservableObject {
@@ -29,7 +30,7 @@ class AllTrainingsModel: ObservableObject {
                 
                 let title = data["title"] as? String ?? ""
                 let description = data["description"] as? String ?? ""
-                let time = data["time"] as? Date ?? Date()
+                let time = (data["time"] as? Timestamp)?.dateValue() ?? Date()
                 
                 self.trainings.append(TrainingModel(id: id, title: title, description: description, time: time))
             }
