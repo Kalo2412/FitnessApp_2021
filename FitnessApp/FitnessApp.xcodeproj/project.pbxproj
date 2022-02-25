@@ -60,7 +60,6 @@
 		D8FEFE3C27BFF31300C7F752 /* TrainingsListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FEFE3B27BFF31300C7F752 /* TrainingsListRow.swift */; };
 		D8FEFE3E27C65E1700C7F752 /* TrainingCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FEFE3D27C65E1700C7F752 /* TrainingCalendar.swift */; };
 		D8FEFE8327C67A3E00C7F752 /* DateValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FEFE8227C67A3E00C7F752 /* DateValue.swift */; };
-		D8FEFE8527C67C5000C7F752 /* Training.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8FEFE8427C67C5000C7F752 /* Training.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,7 +91,6 @@
 		D8FEFE3B27BFF31300C7F752 /* TrainingsListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingsListRow.swift; sourceTree = "<group>"; };
 		D8FEFE3D27C65E1700C7F752 /* TrainingCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingCalendar.swift; sourceTree = "<group>"; };
 		D8FEFE8227C67A3E00C7F752 /* DateValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateValue.swift; sourceTree = "<group>"; };
-		D8FEFE8427C67C5000C7F752 /* Training.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Training.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,7 +174,6 @@
 			isa = PBXGroup;
 			children = (
 				03DFBA7527970BF9005C7473 /* RegisterModel.swift */,
-				D8FEFE8427C67C5000C7F752 /* Training.swift */,
 				03DFBA7827970C79005C7473 /* LoginModel.swift */,
 				03C2511E2799FE8300C0897F /* UserModel.swift */,
 				D8FEFE8227C67A3E00C7F752 /* DateValue.swift */,
@@ -366,7 +363,6 @@
 				0397251D27C6448200493689 /* UsersToAddModel.swift in Sources */,
 				0397251527C5A48100493689 /* UserShortModel.swift in Sources */,
 				03CA0F132799AF3000EF5EF7 /* ProfileView.swift in Sources */,
-				D8FEFE8527C67C5000C7F752 /* Training.swift in Sources */,
 				D866F9DD279EC6FE00C79BB1 /* stateManager.swift in Sources */,
 				D8FEFE3C27BFF31300C7F752 /* TrainingsListRow.swift in Sources */,
 				030ED25C27C9014300A32844 /* AllTrainingsModel.swift in Sources */,

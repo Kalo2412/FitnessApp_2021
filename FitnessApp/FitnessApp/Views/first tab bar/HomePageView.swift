@@ -46,9 +46,9 @@ struct HomePageView: View {
                         RoundedRectangle(cornerRadius: 30)
                             .stroke(Color("darkGreen"), lineWidth: 2)
                         )
-                        .padding(.top, 50)
+                        .padding(.top, 20)
                         .padding(.bottom, 20)
-                        .padding(.horizontal, 50)
+                        .padding(.horizontal, 20)
                         .transition(.move(edge: .bottom))
                         .animation(.spring())
                 }
@@ -73,20 +73,19 @@ struct AddNewTraining: View {
             Color("skyGreen")
             VStack {
                 HStack {
-                    Text("Add new friend")
+                    Text("Add new training")
                         .font(.title)
                         .fontWeight(.bold)
                     Spacer()
                     Button {
-                        allTrainings.append(newTraining)
                         addFriendWindow = false
                     } label: {
                         Text("Done")
                             .font(.title2)
                     }
                 }
-                .padding(.horizontal, 20)
-                .padding(.top, 20)
+                .padding(.horizontal, 15)
+                .padding(.top, 15)
                 Form {
                     Section(header: Text("Date and time:")) {
                         DatePicker("TrainingDate", selection: $newTrainingDate, in: Date()...)
@@ -96,12 +95,6 @@ struct AddNewTraining: View {
                         TextField("Description", text: $newTrainingDescription)
                     }
                     Section(header: Text("Add trainings")) {
-                        /*ForEach(newTraining.training) { training in
-                            Text("\(training.title): \(training.description)")
-                        }
-                        .onDelete { indices in
-                            newTraining.training.remove(atOffsets: indices)
-                        }*/
                         HStack {
                             TextField("New Training", text: $newTrainingTitle)
                             Button(action: {
