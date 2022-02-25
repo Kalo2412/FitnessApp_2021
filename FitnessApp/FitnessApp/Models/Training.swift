@@ -10,6 +10,7 @@ import SwiftUI
 struct Training: Identifiable {
     var id = UUID().uuidString
     var title: String
+    var description: String
     var time: Date = Date()
 }
 
@@ -29,19 +30,19 @@ func getSampleDate(offset: Int) -> Date {
 
 var trainings: [TrainingMetaData] = [
     TrainingMetaData(training: [
-        Training(title: "Workout at home"),
-        Training(title: "Jogging 5 km")],
+                        Training(title: "Workout at home", description: "Pam's youtube video"),
+                        Training(title: "Jogging 5 km", description: "")],
      trainingDate: getSampleDate(offset: 2)),
     TrainingMetaData(training: [
-        Training(title: "Gym weight training"),
-        Training(title: "Jogging 5 km"),
-        Training(title: "Streching")],
+                        Training(title: "Gym weight training", description: "Leg day"),
+                        Training(title: "Jogging 5 km", description: ""),
+                        Training(title: "Streching", description: "For back pain")],
      trainingDate: getSampleDate(offset: -4)),
     TrainingMetaData(training: [
-        Training(title: "Playing football"),
-        Training(title: "Jogging 3 km")],
+                        Training(title: "Playing football", description: ""),
+                        Training(title: "Jogging 3 km", description: "Lake Pancharevo route")],
      trainingDate: getSampleDate(offset: 3)),
     TrainingMetaData(training: [
-        Training(title: "Yoga at home"),],
+                        Training(title: "Yoga at home", description: ""),],
      trainingDate: getSampleDate(offset: -2))
 ]

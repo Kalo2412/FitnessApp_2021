@@ -115,6 +115,8 @@ struct TrainingCalendar: View {
                             Text(training.title)
                                 .font(.title2)
                                 .fontWeight(.bold)
+                            
+                            Text(training.description)
                         }
                         .padding(.vertical,10)
                         .padding(.horizontal)
@@ -126,7 +128,7 @@ struct TrainingCalendar: View {
                         )
                     }
                 } else {
-                    Text("Not trainings for today")
+                    Text("No trainings for today")
                 }
                 
                 

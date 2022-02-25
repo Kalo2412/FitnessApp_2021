@@ -54,6 +54,7 @@ struct AddNewTraining: View {
     @Binding var addFriendWindow: Bool
     @State private var newTraining: TrainingMetaData = TrainingMetaData(training: [], trainingDate: Date())
     @State private var newTrainingTitle: String = ""
+    @State private var newTrainingDescription: String = ""
     var body: some View {
         ZStack {
             Color("skyGreen")
@@ -74,13 +75,16 @@ struct AddNewTraining: View {
                 .padding(.horizontal, 20)
                 .padding(.top, 20)
                 Form {
-                    Section(header: Text("Choose new training date")) {
+                    Section(header: Text("Date and time:")) {
                         DatePicker("TrainingDate", selection: $newTraining.trainingDate, in: Date()...)
                             .datePickerStyle(GraphicalDatePickerStyle())
                     }
+                    Section(header: Text("Description:")) {
+                        TextField("Description", text: $newTrainingDescription)
+                    }
                     Section(header: Text("Add trainings")) {
                         ForEach(newTraining.training) { training in
-                            Text(training.title)
+                            Text("\(training.title): \(training.description)")
                         }
                         .onDelete { indices in
                             newTraining.training.remove(atOffsets: indices)
@@ -89,11 +93,12 @@ struct AddNewTraining: View {
                             TextField("New Training", text: $newTrainingTitle)
                             Button(action: {
                                 withAnimation {
-                                    let training = Training(title: newTrainingTitle, time: newTraining.trainingDate)
+                                    let training = Training(title: newTrainingTitle, description: newTrainingDescription, time: newTraining.trainingDate)
                                     newTraining.training.append(training)
                                     
                                     FirebaseManager.instance.firestore.collection("users").document(stateManager.loggedUser.uid).collection("trainings").document(training.id)
                                         .setData(["title": newTrainingTitle,
+                                                  "description": newTrainingDescription,
                                                   "time": newTraining.trainingDate])
                                         { error in
                                             if error != nil {
@@ -102,6 +107,7 @@ struct AddNewTraining: View {
                                         }
                                     
                                     newTrainingTitle = ""
+                                    newTrainingDescription = ""
                                 }
                             }) {
                                 Image(systemName: "plus.circle.fill")
