@@ -11,16 +11,18 @@ struct HomePageView: View {
     @State var currentDate: Date = Date()
     @State var addFriendWindowToShow: Bool = false
     
+    @ObservedObject var allTrainings = AllTrainingsModel()
+    
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
             ZStack {
                 VStack(spacing: 20) {
-                    TrainingCalendar(currentDate: $currentDate)
+                    TrainingCalendar(currentDate: $currentDate, allTrainings: $allTrainings.trainings)
                 }
                 .padding(.vertical)
                 ZStack {
                     if addFriendWindowToShow {
-                        AddNewTraining(addFriendWindow: $addFriendWindowToShow)
+                        AddNewTraining(addFriendWindow: $addFriendWindowToShow, allTrainings: $allTrainings.trainings)
                             .padding(.top, 120)
                             .padding(.horizontal, 50)
                             .transition(.move(edge: .bottom))
@@ -52,9 +54,13 @@ struct AddNewTraining: View {
     @EnvironmentObject var stateManager: StateManager
     
     @Binding var addFriendWindow: Bool
-    @State private var newTraining: TrainingMetaData = TrainingMetaData(training: [], trainingDate: Date())
+    @State private var newTraining: TrainingModel = TrainingModel(id: "", title: "", description: "", time: Date())
     @State private var newTrainingTitle: String = ""
     @State private var newTrainingDescription: String = ""
+    @State private var newTrainingDate: Date = Date()
+    
+    @Binding var allTrainings: [TrainingModel]
+    
     var body: some View {
         ZStack {
             Color("skyGreen")
@@ -65,7 +71,7 @@ struct AddNewTraining: View {
                         .fontWeight(.bold)
                     Spacer()
                     Button {
-                        trainings.append(newTraining)
+                        allTrainings.append(newTraining)
                         addFriendWindow = false
                     } label: {
                         Text("Done")
@@ -76,30 +82,30 @@ struct AddNewTraining: View {
                 .padding(.top, 20)
                 Form {
                     Section(header: Text("Date and time:")) {
-                        DatePicker("TrainingDate", selection: $newTraining.trainingDate, in: Date()...)
+                        DatePicker("TrainingDate", selection: $newTrainingDate, in: Date()...)
                             .datePickerStyle(GraphicalDatePickerStyle())
                     }
                     Section(header: Text("Description:")) {
                         TextField("Description", text: $newTrainingDescription)
                     }
                     Section(header: Text("Add trainings")) {
-                        ForEach(newTraining.training) { training in
+                        /*ForEach(newTraining.training) { training in
                             Text("\(training.title): \(training.description)")
                         }
                         .onDelete { indices in
                             newTraining.training.remove(atOffsets: indices)
-                        }
+                        }*/
                         HStack {
                             TextField("New Training", text: $newTrainingTitle)
                             Button(action: {
                                 withAnimation {
-                                    let training = Training(title: newTrainingTitle, description: newTrainingDescription, time: newTraining.trainingDate)
-                                    newTraining.training.append(training)
+                                    let training = TrainingModel(id: UUID().uuidString, title: newTrainingTitle, description: newTrainingDescription, time: newTrainingDate)
+                                    allTrainings.append(training)
                                     
                                     FirebaseManager.instance.firestore.collection("users").document(stateManager.loggedUser.uid).collection("trainings").document(training.id)
                                         .setData(["title": newTrainingTitle,
                                                   "description": newTrainingDescription,
-                                                  "time": newTraining.trainingDate])
+                                                  "time": newTrainingDate])
                                         { error in
                                             if error != nil {
                                                 print("Error saving training")
@@ -108,6 +114,7 @@ struct AddNewTraining: View {
                                     
                                     newTrainingTitle = ""
                                     newTrainingDescription = ""
+                                    newTrainingDate = Date()
                                 }
                             }) {
                                 Image(systemName: "plus.circle.fill")

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TrainingCalendar: View {
     @Binding var currentDate: Date
+    @Binding var allTrainings: [TrainingModel]
     
     @State var currentMonth: Int = 0
     var body: some View {
@@ -105,10 +106,10 @@ struct TrainingCalendar: View {
                 .padding(.leading, 5)
                 .padding(.vertical, 10)
                 
-                if let training = trainings.first(where: { training in
-                    return isSameDay(date1: training.trainingDate, date2: currentDate)
-                }) {
-                    ForEach(training.training) { training in
+                if let trainings = allTrainings.filter { training in
+                    return isSameDay(date1: training.time, date2: currentDate)
+                } {
+                    ForEach(trainings) { training in
                         VStack(alignment: .leading, spacing: 10) {
                             Text(training.time.addingTimeInterval(Double.random(in: 0...5000)), style: .time)
                             
@@ -144,19 +145,19 @@ struct TrainingCalendar: View {
     func CardView(value: DateValue) -> some View {
         VStack {
             if value.day != -1 {
-                if let training = trainings.first(where: { training in
-                    return isSameDay(date1: training.trainingDate, date2: value.date)
+                if let training = allTrainings.first(where: { training in
+                    return isSameDay(date1: training.time, date2: value.date)
                 }) {
                     Text("\(value.day)")
                         .font(.title3)
                         .fontWeight(.bold)
-                        .foregroundColor(isSameDay(date1: training.trainingDate, date2: currentDate) ? .white : .primary)
+                        .foregroundColor(isSameDay(date1: training.time, date2: currentDate) ? .white : .primary)
                         .frame(maxWidth: .infinity)
                     
                     Spacer()
                     
                     Circle()
-                        .fill(isSameDay(date1: training.trainingDate, date2: currentDate) ? .white : Color("grassyGreen"))
+                        .fill(isSameDay(date1: training.time, date2: currentDate) ? .white : Color("grassyGreen"))
                         .frame(width: 8, height: 8)
                     
                 } else {

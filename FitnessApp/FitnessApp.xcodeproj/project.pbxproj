@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		030ED25927C9004600A32844 /* TrainingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030ED25827C9004600A32844 /* TrainingModel.swift */; };
+		030ED25C27C9014300A32844 /* AllTrainingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 030ED25B27C9014300A32844 /* AllTrainingsModel.swift */; };
 		035F3BBF279DC71600C58537 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 035F3BBE279DC71600C58537 /* ImagePicker.swift */; };
-		03635F982798352400FD4F61 /* HfomePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03635F972798352400FD4F61 /* HomePageView.swift */; };
+		03635F982798352400FD4F61 /* HomePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03635F972798352400FD4F61 /* HomePageView.swift */; };
 		0397251527C5A48100493689 /* UserShortModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397251427C5A48100493689 /* UserShortModel.swift */; };
 		0397251A27C6433B00493689 /* AddFriendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397251927C6433B00493689 /* AddFriendView.swift */; };
 		0397251D27C6448200493689 /* UsersToAddModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0397251C27C6448200493689 /* UsersToAddModel.swift */; };
@@ -62,6 +64,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		030ED25827C9004600A32844 /* TrainingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingModel.swift; sourceTree = "<group>"; };
+		030ED25B27C9014300A32844 /* AllTrainingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTrainingsModel.swift; sourceTree = "<group>"; };
 		035F3BBE279DC71600C58537 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		03635F972798352400FD4F61 /* HomePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageView.swift; sourceTree = "<group>"; };
 		0397251427C5A48100493689 /* UserShortModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserShortModel.swift; sourceTree = "<group>"; };
@@ -179,6 +183,8 @@
 				D866F9DC279EC6FE00C79BB1 /* stateManager.swift */,
 				0397251427C5A48100493689 /* UserShortModel.swift */,
 				0397251C27C6448200493689 /* UsersToAddModel.swift */,
+				030ED25827C9004600A32844 /* TrainingModel.swift */,
+				030ED25B27C9014300A32844 /* AllTrainingsModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -355,6 +361,7 @@
 				035F3BBF279DC71600C58537 /* ImagePicker.swift in Sources */,
 				03CA0F05279979EE00EF5EF7 /* PopUpWindow.swift in Sources */,
 				03CA0F162799B17800EF5EF7 /* TrainingsListView.swift in Sources */,
+				030ED25927C9004600A32844 /* TrainingModel.swift in Sources */,
 				03CA0F102799AD0200EF5EF7 /* MainView.swift in Sources */,
 				0397251D27C6448200493689 /* UsersToAddModel.swift in Sources */,
 				0397251527C5A48100493689 /* UserShortModel.swift in Sources */,
@@ -362,6 +369,7 @@
 				D8FEFE8527C67C5000C7F752 /* Training.swift in Sources */,
 				D866F9DD279EC6FE00C79BB1 /* stateManager.swift in Sources */,
 				D8FEFE3C27BFF31300C7F752 /* TrainingsListRow.swift in Sources */,
+				030ED25C27C9014300A32844 /* AllTrainingsModel.swift in Sources */,
 				D8FEFE8327C67A3E00C7F752 /* DateValue.swift in Sources */,
 				D8FEFE3E27C65E1700C7F752 /* TrainingCalendar.swift in Sources */,
 				03DFBA722796FC70005C7473 /* FirebaseManager.swift in Sources */,
@@ -564,7 +572,7 @@
 /* Begin XCRemoteSwiftPackageReference section */
 		D84EF9EB279EAEDE004E5EC7 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
-            repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 8.0.0;
