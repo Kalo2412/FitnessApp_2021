@@ -28,6 +28,7 @@
 		03DFBA7627970BFA005C7473 /* RegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DFBA7527970BF9005C7473 /* RegisterModel.swift */; };
 		03DFBA7927970C79005C7473 /* LoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03DFBA7827970C79005C7473 /* LoginModel.swift */; };
 		03F9FD6A27C8509C004E33F1 /* LoggedUserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03F9FD6927C8509C004E33F1 /* LoggedUserProfileView.swift */; };
+		D8344BE427E9EC1D00EF28E4 /* ColorAssetsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8344BE327E9EC1D00EF28E4 /* ColorAssetsConstants.swift */; };
 		D8418CD327977D2000CFC20B /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8418CD227977D2000CFC20B /* StartView.swift */; };
 		D84EF9ED279EAEDE004E5EC7 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D84EF9EC279EAEDE004E5EC7 /* FirebaseAnalytics */; };
 		D84EF9EF279EAEDE004E5EC7 /* FirebaseAnalyticsSwift-Beta in Frameworks */ = {isa = PBXBuildFile; productRef = D84EF9EE279EAEDE004E5EC7 /* FirebaseAnalyticsSwift-Beta */; };
@@ -86,6 +87,7 @@
 		03DFBA7527970BF9005C7473 /* RegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterModel.swift; sourceTree = "<group>"; };
 		03DFBA7827970C79005C7473 /* LoginModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModel.swift; sourceTree = "<group>"; };
 		03F9FD6927C8509C004E33F1 /* LoggedUserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedUserProfileView.swift; sourceTree = "<group>"; };
+		D8344BE327E9EC1D00EF28E4 /* ColorAssetsConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorAssetsConstants.swift; sourceTree = "<group>"; };
 		D8418CD227977D2000CFC20B /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		D866F9DC279EC6FE00C79BB1 /* stateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stateManager.swift; sourceTree = "<group>"; };
 		D8FEFE3B27BFF31300C7F752 /* TrainingsListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingsListRow.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 		03DFBA562796BBB9005C7473 /* FitnessApp */ = {
 			isa = PBXGroup;
 			children = (
+				D8344BE227E9EC0200EF28E4 /* AppConstants */,
 				03DFBA572796BBBA005C7473 /* FitnessAppApp.swift */,
 				03DFBA7D27971596005C7473 /* Controllers */,
 				03DFBA7C27971577005C7473 /* Views */,
@@ -190,12 +193,9 @@
 			isa = PBXGroup;
 			children = (
 				D8FEFE3A27BFF2F500C7F752 /* View Models */,
-				D866F9DA279EC69D00C79BB1 /* third tab bar */,
-				D866F9D7279EC64E00C79BB1 /* first tab bar */,
-				D866F9D9279EC68000C79BB1 /* second tab bar */,
-				03CA0F0F2799AD0200EF5EF7 /* MainView.swift */,
-				03CA0F04279979EE00EF5EF7 /* PopUpWindow.swift */,
-				D866F9DB279EC6C000C79BB1 /* root views */,
+				D8344BE627E9ECC700EF28E4 /* Tabs */,
+				D8344BE527E9EC3600EF28E4 /* PopUpWindows */,
+				D866F9DB279EC6C000C79BB1 /* RootViews */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -209,39 +209,42 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		D866F9D7279EC64E00C79BB1 /* first tab bar */ = {
+		D8344BE227E9EC0200EF28E4 /* AppConstants */ = {
 			isa = PBXGroup;
 			children = (
-				03635F972798352400FD4F61 /* HomePageView.swift */,
+				D8344BE327E9EC1D00EF28E4 /* ColorAssetsConstants.swift */,
 			);
-			path = "first tab bar";
+			path = AppConstants;
 			sourceTree = "<group>";
 		};
-		D866F9D9279EC68000C79BB1 /* second tab bar */ = {
+		D8344BE527E9EC3600EF28E4 /* PopUpWindows */ = {
 			isa = PBXGroup;
 			children = (
+				03CA0F04279979EE00EF5EF7 /* PopUpWindow.swift */,
+			);
+			path = PopUpWindows;
+			sourceTree = "<group>";
+		};
+		D8344BE627E9ECC700EF28E4 /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				03CA0F0F2799AD0200EF5EF7 /* MainView.swift */,
 				03CA0F152799B17700EF5EF7 /* TrainingsListView.swift */,
-			);
-			path = "second tab bar";
-			sourceTree = "<group>";
-		};
-		D866F9DA279EC69D00C79BB1 /* third tab bar */ = {
-			isa = PBXGroup;
-			children = (
+				03635F972798352400FD4F61 /* HomePageView.swift */,
 				03CA0F122799AF3000EF5EF7 /* ProfileView.swift */,
 				0397251927C6433B00493689 /* AddFriendView.swift */,
 				03F9FD6927C8509C004E33F1 /* LoggedUserProfileView.swift */,
 			);
-			path = "third tab bar";
+			path = Tabs;
 			sourceTree = "<group>";
 		};
-		D866F9DB279EC6C000C79BB1 /* root views */ = {
+		D866F9DB279EC6C000C79BB1 /* RootViews */ = {
 			isa = PBXGroup;
 			children = (
 				D8418CD227977D2000CFC20B /* StartView.swift */,
 				03DFBA592796BBBA005C7473 /* RegisterAndLoginView.swift */,
 			);
-			path = "root views";
+			path = RootViews;
 			sourceTree = "<group>";
 		};
 		D8FEFE3A27BFF2F500C7F752 /* View Models */ = {
@@ -367,6 +370,7 @@
 				D8FEFE3C27BFF31300C7F752 /* TrainingsListRow.swift in Sources */,
 				030ED25C27C9014300A32844 /* AllTrainingsModel.swift in Sources */,
 				D8FEFE8327C67A3E00C7F752 /* DateValue.swift in Sources */,
+				D8344BE427E9EC1D00EF28E4 /* ColorAssetsConstants.swift in Sources */,
 				D8FEFE3E27C65E1700C7F752 /* TrainingCalendar.swift in Sources */,
 				03DFBA722796FC70005C7473 /* FirebaseManager.swift in Sources */,
 				03DFBA7627970BFA005C7473 /* RegisterModel.swift in Sources */,

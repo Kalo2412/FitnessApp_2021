@@ -90,8 +90,7 @@ struct TrainingCalendar: View {
                 }
             }
             
-            VStack(spacing: 15){
-                
+            VStack(spacing: 15) {
                 VStack(spacing: 10) {
                     Text("Trainings")
                         .font(.title)
@@ -163,6 +162,7 @@ struct TrainingCalendar: View {
                     Circle()
                         .fill(isSameDay(date1: training.time, date2: currentDate) ? .white : Color("grassyGreen"))
                         .frame(width: 8, height: 8)
+                    
                     
                 } else {
                     Text("\(value.day)")

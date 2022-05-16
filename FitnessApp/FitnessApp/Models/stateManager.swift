@@ -13,5 +13,4 @@ class StateManager: ObservableObject {
     @Published var isLoginMode: Bool = true
     @Published var selection: Int = 1
     @Published var loggedUser: UserModel = UserModel(uid: FirebaseManager.instance.auth.currentUser?.uid ?? "")
-    
 }
